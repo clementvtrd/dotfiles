@@ -1,4 +1,6 @@
-sudo cp -r ./JetBrainsMono /usr/share/fonts/truetype
-sudo cp -r ./MesloLGS /usr/share/fonts/truetype
+local="${1:-$(pwd)/fonts}"
 
-sudo fc-cache
+sudo cp -r ${local}/JetBrainsMono /usr/share/fonts/truetype
+sudo cp -r ${local}/MesloLGS /usr/share/fonts/truetype
+
+fc-cache

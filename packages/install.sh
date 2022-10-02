@@ -1,1 +1,3 @@
-sudo apt install -y ./*.deb
+local="${1:-$(pwd)/packages}"
+
+sudo apt install -y ${local}/*.deb
