@@ -1,0 +1,1 @@
+alias ls="exa --icons --group-directories-first --long --no-permissions --octal-permissions --no-time"
