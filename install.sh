@@ -3,3 +3,4 @@ sudo apt upgrade -y
 
 sh ./fonts/install.sh     "$(pwd)/fonts"
 sh ./shell/install.sh     "$(pwd)/shell"
+sh ./lib/rust.sh
