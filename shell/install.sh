@@ -13,7 +13,8 @@ ln -s ${local}/.zsh_profile.zsh   ~/.zsh_profile.zsh
 ln -s ${local}/.zsh_alias.zsh     ~/.zsh_alias.zsh
 
 # Install dependencies
-sudo apt install -y zsh alacritty exa
+sudo apt install -y zsh exa
+sudo snap install code --classic
 
 # Change current shell
 chsh --shell $(which zsh)
