@@ -1,10 +1,10 @@
 [user]
-	signingkey = BC8DC20C9CD8F656
-	name = clementvtrd
-	email = 84911237+clementvtrd@users.noreply.github.com
+  signingkey =
+  name = clementvtrd
+  email = 84911237+clementvtrd@users.noreply.github.com
 
 [commit]
-	gpgsign = true
+  gpgsign = true
 
 [core]
   excludesFile = ~/.gitignore 
