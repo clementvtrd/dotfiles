@@ -14,7 +14,6 @@ ln -s ${local}/.zsh_alias.zsh     ~/.zsh_alias.zsh
 
 # Install dependencies
 sudo apt install -y zsh exa
-sudo snap install code --classic
 
 # Change current shell
 chsh --shell $(which zsh)
