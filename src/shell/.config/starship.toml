@@ -1,0 +1,63 @@
+right_format="""
+$sudo\
+$battery\
+$time
+"""
+
+format = """
+$username\
+$hostname\
+$localip\
+$directory\
+$line_break\
+$git_branch\
+$character"""
+
+[username]
+style_user = "blue bold"
+format = "[$user]($style) "
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = true
+format = "🚀 [$hostname](bold blue) "
+disabled = false
+
+[sudo]
+format="[$symbol]($style)"
+symbol = "🔑 "
+disabled = false
+
+[battery]
+disabled = false
+
+[[battery.display]]
+threshold = 25
+style = "bold red"
+
+[[battery.display]]
+threshold = 50
+style = "bold yellow"
+
+[[battery.display]]
+threshold = 75
+style = "bold bright-yellow"
+
+[[battery.display]]
+threshold = 100
+style = "bold green"
+
+[time]
+format = "[$time]($style)"
+style = "bright black"
+disabled = false
+
+[line_break]
+disabled = false
+
+[git_branch]
+format = "[$symbol$branch(:$remote_branch)]($style) "
+
+[directory]
+home_symbol = "🏠"

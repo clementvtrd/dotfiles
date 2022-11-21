@@ -1,0 +1,40 @@
+version: "3"
+
+output: prefixed
+silent: true
+
+tasks:
+  default:
+    desc: Configure all the dotfiles
+    cmds:
+      - task: shell
+      - task: git
+      - task: fonts
+
+  shell:
+    desc: Configure terminal dotfiles
+    interactive: true
+    dir: src
+    cmds:
+      - stow -t ~/ shell
+      - brew install exa
+  
+  git:
+    desc: Copy gitconfig and global gitignore
+    cmds:
+      - ln -sf ${PWD}/src/git/.gitignore ~/.gitignore
+      - task: git_config
+  
+  git_config:
+    dir: ./src/git
+    cmds:
+      - sh: cp .gitconfig ~/.gitconfig
+    status:
+      - "test -f ~/.gitconfig"
+  
+  fonts:
+    desc: Install useful fonts
+    dir: src
+    cmds:
+      - '{{if eq OS "linux"}}sudo {{end}}stow -t {{if eq OS "darwin"}}~/Bibliothèque/Fonts/{{else}}/usr/share/fonts/truetype{{end}} fonts'
+      - fc-cache
