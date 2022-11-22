@@ -28,7 +28,7 @@ tasks:
   git_config:
     dir: ./src/git
     cmds:
-      - sh: cp .gitconfig ~/.gitconfig
+      - cp .gitconfig ~/.gitconfig
     status:
       - "test -f ~/.gitconfig"
   
@@ -36,5 +36,4 @@ tasks:
     desc: Install useful fonts
     dir: src
     cmds:
-      - '{{if eq OS "linux"}}sudo {{end}}stow -t {{if eq OS "darwin"}}~/Bibliothèque/Fonts/{{else}}/usr/share/fonts/truetype{{end}} fonts'
-      - fc-cache
+      - '{{if eq OS "linux"}}sudo {{end}}stow -t {{if eq OS "darwin"}}~/Library/Fonts/{{else}}/usr/share/fonts/truetype{{end}} fonts'
