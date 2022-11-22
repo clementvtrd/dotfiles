@@ -1,12 +1,7 @@
-right_format="""
-$sudo\
-$battery\
-$time
-"""
-
 format = """
 $username\
 $hostname\
+$sudo\
 $localip\
 $directory\
 $line_break\
