@@ -5,6 +5,9 @@ bindkey "^[[1;3D" backward-word
 
 export PATH=$PATH:${HOME}/go/bin
 
+# Homebrew
+export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
+
 # Android
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
