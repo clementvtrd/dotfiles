@@ -1,13 +1,4 @@
-source $HOME/.zsh_profile.zsh
-source $HOME/.zsh_alias.zsh
-
-if [ -d /etc/profile.d ]; then
-  for profile in /etc/profile.d/*.sh; do
-    if [ -r $profile ]; then
-      . $profile
-    fi
-  done
-  unset profile
-fi
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
 
 eval "$(starship init zsh)"
