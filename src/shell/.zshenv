@@ -6,7 +6,8 @@ export PATH=$PATH:${HOME}/go/bin
 export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
 
 # Android
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export ANDROID_SDK_ROOT=$HOME/Library/Android/Sdk
+export ANDROID_HOME=$ANDROID_SDK_ROOT
 export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
 export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
