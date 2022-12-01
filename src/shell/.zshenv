@@ -1,5 +1,7 @@
+export EDITOR='vim'
 export GPG_TTY=$(tty)
 
+# Go
 export PATH=$PATH:${HOME}/go/bin
 
 # Homebrew
