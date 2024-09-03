@@ -1,0 +1,8 @@
+.DS_Store
+docker-compose.override.yaml
+.idea
+.vscode
+*.sql
+*.gz
+.phpactor.json
+.zed

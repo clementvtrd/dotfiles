@@ -1,0 +1,48 @@
+#!/bin/zsh
+
+# Check if -h or --help option is provided
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+  echo "Usage: dependabot <merge|rebase> [pr_number]"
+
+  if ! command -v gh &>/dev/null; then
+    echo "---"
+    echo "GitHub CLI ('gh') is not installed. Please install it first."
+  fi
+
+  return 0
+fi
+
+# Check if the 'gh' command-line tool is available
+if ! command -v gh &>/dev/null; then
+  echo "GitHub CLI ('gh') is not installed. Please install it first."
+  return 1
+fi
+
+# Check if no argument or one argument is provided
+if [ $# -eq 0 ]; then
+  echo "Usage: dependabot <merge|rebase> [pr_number]"
+  return 1
+fi
+
+local action
+
+case $1 in
+  merge)
+    action="approve"
+    ;;
+  rebase)
+    action="comment"
+    ;;
+  *)
+    echo "First argument must be either 'merge' or 'rebase'"
+    return 1
+    ;;
+esac
+
+if [ $# -eq 2 ]; then
+  gh pr review --body "@dependabot $1" --$action $2
+else
+  gh pr list --app Dependabot --jq ".[].number" --json number |
+    xargs -I % sh -c "gh pr review --body '@dependabot $1' --$action %;"
+fi
+
