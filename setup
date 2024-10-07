@@ -4,22 +4,12 @@ sudo mkdir -p /usr/local/bin
 
 if ! command -v brew > /dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  brew bundle install --no-lock
 fi
 
+brew bundle install --no-lock
 
 stow --dotfiles -t $HOME home
 
 if [ -z "${NVM_DIR}" ]; then
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 fi
-
-if ! command -v phpbrew > /dev/null; then
-  curl -L -O https://github.com/phpbrew/phpbrew/releases/latest/download/phpbrew.phar
-  chmod +x phpbrew.phar
-  sudo mv phpbrew.phar /usr/local/bin/phpbrew
-  phpbrew init
-  phpbrew lookup-prefix homebrew
-fi
-
-
