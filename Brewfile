@@ -3,6 +3,8 @@ tap "symfony-cli/tap"
 
 cask_args appdir: "~/Applications", require_sha: true
 
+## Formulae
+
 # Automatic configure script builder
 brew "autoconf"
 # Tool for generating GNU Standards-compliant Makefiles
@@ -13,10 +15,10 @@ brew "oniguruma"
 brew "bat"
 # Freely available high-quality data compressor
 brew "bzip2"
-# C library for reading, creating, and modifying zip archives
-brew "libzip"
 # Library for command-line editing
 brew "readline"
+# C library for reading, creating, and modifying zip archives
+brew "libzip"
 # General-purpose scripting language
 brew "php"
 # Dependency Manager for PHP
@@ -25,14 +27,20 @@ brew "composer"
 brew "coreutils"
 # Top-like interface for container metrics
 brew "ctop"
+# Command-line tool for DigitalOcean
+brew "doctl"
 # GitHub command-line tool
 brew "gh"
+# Interpreter for PostScript and PDF
+brew "ghostscript"
 # Quickly rewrite git repository history
 brew "git-filter-repo"
 # Task is a task runner/build tool that aims to be simpler and easier to use
 brew "go-task"
 # Smarter Dockerfile linter to validate best practices
 brew "hadolint"
+# Tools and libraries to manipulate images in many formats
+brew "imagemagick"
 # Conversion library
 brew "libiconv", link: true
 # X.509 and CMS library
@@ -53,6 +61,8 @@ brew "pkg-config"
 brew "powerlevel10k"
 # Python version management
 brew "pyenv"
+# Easily download, build, install, upgrade, and uninstall Python packages
+brew "python-setuptools"
 # Install various Ruby versions and implementations
 brew "ruby-build"
 # Ruby version manager
@@ -72,6 +82,8 @@ brew "zlib"
 # Symfony CLI helps Symfony developers manage projects, from local code to remote infrastructure
 brew "symfony-cli/tap/symfony-cli"
 
+## Casks
+
 # Universal database tool and SQL client
 cask "dbeaver-community"
 # Web browser
@@ -82,6 +94,8 @@ cask "ngrok"
 cask "orbstack"
 # Team communication and collaboration software
 cask "slack"
+# Spotify and iTunes in the menu bar
+cask "spotmenu"
 # Open-source code editor
 cask "visual-studio-code"
 # OpenJDK distribution from Azul
