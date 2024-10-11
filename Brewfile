@@ -51,8 +51,6 @@ brew "libxml2"
 brew "libyaml"
 # Simple tool to make locally trusted development certificates
 brew "mkcert"
-# Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@1.1"
 # Manage compile and link flags for libraries
