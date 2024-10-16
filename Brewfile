@@ -41,6 +41,8 @@ brew "go-task"
 brew "hadolint"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
+# Install and debug iPhone apps from the command-line
+brew "ios-deploy"
 # Conversion library
 brew "libiconv", link: true
 # X.509 and CMS library
