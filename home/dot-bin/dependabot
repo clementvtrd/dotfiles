@@ -2,7 +2,7 @@
 
 # Check if -h or --help option is provided
 if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-  echo "Usage: dependabot <merge|rebase> [pr_number]"
+  echo "Usage: dependabot <merge|rebase|close|recreate> [pr_number]"
 
   if ! command -v gh &>/dev/null; then
     echo "---"
@@ -20,7 +20,7 @@ fi
 
 # Check if no argument or one argument is provided
 if [ $# -eq 0 ]; then
-  echo "Usage: dependabot <merge|rebase> [pr_number]"
+  echo "Usage: dependabot <merge|rebase|close|recreate> [pr_number]"
   return 1
 fi
 
@@ -30,7 +30,13 @@ case $1 in
   merge)
     action="approve"
     ;;
+  close)
+    action="comment"
+    ;;
   rebase)
+    action="comment"
+    ;;
+  recreate)
     action="comment"
     ;;
   *)
