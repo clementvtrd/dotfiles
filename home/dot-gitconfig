@@ -7,7 +7,7 @@
 	autocrlf = input
 
 [user]
-	name = clementvtrd
+	name = Clément Vétillard
 	email = 84911237+clementvtrd@users.noreply.github.com
   signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHn/FhaZYeWo1TboQyMI3LMPyOiyi0aWuYCBaWhhEETn
 
@@ -21,3 +21,8 @@
   gpgsign = true
 [push]
 	autoSetupRemote = true
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

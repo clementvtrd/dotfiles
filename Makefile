@@ -10,11 +10,11 @@ homebrew:
 
 nvm:
 	@if [ -z "$${NVM_DIR}" ]; then \
-		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash; \
+		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash; \
 	fi
 
 install:
-	brew bundle install
+	brew bundle install --no-lock
 
 stow:
 	stow --dotfiles -t ${HOME} home
