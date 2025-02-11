@@ -1,13 +1,3 @@
-eval "$(starship init zsh)"
-
-if [ -f $HOME/.zaliases ]; then
-	source $HOME/.zaliases
-fi
-
-if [ -f $HOME/.zaliases ]; then
-	source $HOME/.zaliases
-fi
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -16,6 +6,8 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(rbenv init - zsh)"
 
 autoload -U add-zsh-hook
+
+source $HOME/.zaliases
 
 ## PYENV
 
@@ -36,3 +28,10 @@ export PATH=$PATH:$HOME/.bin:$HOME/.local/bin
 
 # Added by OrbStack: command-line tools and integration
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+
+function iterm2_tab_title() {
+    echo "\033]0;${PWD##*/}\007"
+}
+
+# For zsh
+precmd() { iterm2_tab_title }

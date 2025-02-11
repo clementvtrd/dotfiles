@@ -1,24 +1,21 @@
 tap "homebrew/bundle"
 
+cask_args appdir: "~/Applications", require_sha: true
+
 brew "ansible"
 brew "bat"
 brew "php"
 brew "composer"
 brew "coreutils"
 brew "ctop"
-brew "doctl"
 brew "gcc"
 brew "gh"
-brew "ghostscript"
 brew "git"
-brew "git-filter-repo"
 brew "go-task"
-brew "imagemagick"
 brew "ios-deploy"
 brew "make"
 brew "mkcert"
 brew "neovim"
-brew "openssl@1.1"
 brew "pkgconf"
 brew "pyenv"
 brew "python-setuptools"
@@ -29,10 +26,12 @@ brew "unzip"
 brew "watchman"
 brew "wget"
 brew "yq"
-cask "1password-cli"
-cask "ngrok"
 
-cask "orbstack", args: { appdir: "~/Applications" }
-cask "slack", args: { appdir: "~/Applications" }
-cask "visual-studio-code", args: { appdir: "~/Applications" }
-cask "zulu@17", args: { appdir: "~/Applications" }
+cask "1password-cli"
+cask "figma"
+cask "ngrok"
+cask "orbstack"
+cask "slack"
+cask "visual-studio-code"
+cask "warp"
+cask "zulu@17"
