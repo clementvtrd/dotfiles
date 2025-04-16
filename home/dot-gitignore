@@ -1,8 +1,5 @@
 .DS_Store
 docker-compose.override.yaml
-.idea
 .vscode
-.fleet
 *.sql
 *.gz
-.phpactor.json

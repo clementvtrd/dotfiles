@@ -14,7 +14,7 @@ nvm:
 	fi
 
 install:
-	arch -arm64 brew bundle install --no-lock
+	arch -arm64 brew bundle install
 
 stow:
 	stow --dotfiles -t ${HOME} home
