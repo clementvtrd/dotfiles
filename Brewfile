@@ -1,5 +1,4 @@
 tap "homebrew/bundle"
-tap "koekeishiya/formulae"
 
 brew "ansible"
 brew "bat"
@@ -16,7 +15,6 @@ brew "imagemagick"
 brew "ios-deploy"
 brew "make"
 brew "mkcert"
-brew "mysql-client"
 brew "neovim"
 brew "pkgconf"
 brew "powerlevel10k"
@@ -29,8 +27,6 @@ brew "unzip"
 brew "watchman"
 brew "wget"
 brew "yq"
-brew "koekeishiya/formulae/skhd"
-brew "koekeishiya/formulae/yabai"
 
 cask "1password-cli", args: { appdir: "~/Applications" }
 cask "font-hack-nerd-font"
@@ -40,19 +36,3 @@ cask "slack", args: { appdir: "~/Applications" }
 cask "visual-studio-code", args: { appdir: "~/Applications" }
 cask "zulu@17", args: { appdir: "~/Applications" }
 
-vscode "arcanis.vscode-zipfs"
-vscode "bmewburn.vscode-intelephense-client"
-vscode "bradlc.vscode-tailwindcss"
-vscode "dbaeumer.vscode-eslint"
-vscode "docker.docker"
-vscode "github.copilot"
-vscode "github.copilot-chat"
-vscode "graphql.vscode-graphql-syntax"
-vscode "junstyle.php-cs-fixer"
-vscode "ms-azuretools.vscode-docker"
-vscode "redhat.vscode-xml"
-vscode "redhat.vscode-yaml"
-vscode "sanderronde.phpstan-vscode"
-vscode "styled-components.vscode-styled-components"
-vscode "stylelint.vscode-stylelint"
-vscode "swmansion.react-native-ide"
