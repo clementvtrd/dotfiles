@@ -1,0 +1,10 @@
+tap "homebrew/bundle"
+
+brew "libb2"
+brew "openssl"
+brew "pyenv"
+brew "readline"
+brew "sqlite3"
+brew "tcl-tk@8"
+brew "xz"
+brew "zlib"
