@@ -1,0 +1,26 @@
+cask_args appdir: "~/Applications", require_sha: true
+
+cask "font-hack-nerd-font"
+cask "ngrok"
+cask "orbstack"
+cask "slack"
+cask "ubersicht"
+cask "visual-studio-code"
+
+brew "bat"
+brew "composer"
+brew "coreutils"
+brew "ctop"
+brew "gh"
+brew "git"
+brew "go-task"
+brew "lazygit"
+brew "make"
+brew "mkcert"
+brew "neovim"
+brew "php"
+brew "powerlevel10k"
+brew "stow"
+
+tap "nikitabobko/tap"
+cask "nikitabobko/tap/aerospace"
