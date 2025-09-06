@@ -16,6 +16,7 @@ dependencies:
 
 stow:
 	stow --dotfiles -t ${HOME} home
+	stow -t "${HOME}/Library/Application Support/Übersicht" ubersicht
 
 install:
 	arch -arm64 brew bundle --global
