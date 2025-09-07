@@ -1,13 +1,8 @@
+tap "nikitabobko/tap"
+
 cask_args appdir: "~/Applications", require_sha: true
 
-cask "arc"
-cask "font-hack-nerd-font"
-cask "ngrok"
-cask "orbstack"
-cask "slack"
-cask "ubersicht"
-cask "visual-studio-code"
-
+brew "ast-grep"
 brew "bat"
 brew "composer"
 brew "coreutils"
@@ -21,7 +16,14 @@ brew "mkcert"
 brew "neovim"
 brew "php"
 brew "powerlevel10k"
+brew "ripgrep"
 brew "stow"
 
-tap "nikitabobko/tap"
+cask "arc"
+cask "font-hack-nerd-font"
+cask "ngrok"
 cask "nikitabobko/tap/aerospace"
+cask "orbstack"
+cask "slack"
+cask "ubersicht"
+cask "visual-studio-code"
