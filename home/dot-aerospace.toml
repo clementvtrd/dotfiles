@@ -192,11 +192,11 @@ exec-on-workspace-change = [
   9 = 'main'
 
 [[on-window-detected]]
-    if.app-id = 'company.thebrowser.Browser'
+    if.app-id = 'app.zen-browser.zen'
     run = ['move-node-to-workspace 1 --focus-follows-window']
 
 [[on-window-detected]]
-    if.app-id = 'com.microsoft.VSCode'
+    if.app-id = 'dev.zed.Zed'
     run = ['move-node-to-workspace 2 --focus-follows-window']
 
 [[on-window-detected]]
@@ -209,5 +209,8 @@ exec-on-workspace-change = [
 
 [[on-window-detected]]
     if.app-id = 'com.spotify.client'
-    run = ['move-node-to-workspace 9']
+    run = ['move-node-to-workspace 8']
 
+[[on-window-detected]]
+    if.app-id = 'com.openai.chat'
+    run = ['move-node-to-workspace 9']

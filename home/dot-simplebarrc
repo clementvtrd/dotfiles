@@ -32,7 +32,7 @@
   },
   "themes": {
     "lightTheme": "CatppuccinLatte",
-    "darkTheme": "CatppuccinMocha",
+    "darkTheme": "CatppuccinFrappe",
     "colorMain": "",
     "colorMainAlt": "",
     "colorMinor": "",
@@ -50,12 +50,12 @@
     "colorBackground": ""
   },
   "process": {
-    "showOnDisplay": "1",
+    "showOnDisplay": "",
     "displayOnlyCurrent": false,
-    "centered": false,
+    "centered": true,
     "showCurrentSpaceMode": false,
     "hideWindowTitle": false,
-    "displayOnlyIcon": false,
+    "displayOnlyIcon": true,
     "expandAllProcesses": false,
     "displaySkhdMode": false,
     "displayStackIndex": false,
@@ -80,7 +80,7 @@
   },
   "widgets": {
     "processWidget": true,
-    "githubWidget": true,
+    "githubWidget": false,
     "weatherWidget": false,
     "netstatsWidget": false,
     "cpuWidget": false,
