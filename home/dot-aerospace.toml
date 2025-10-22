@@ -68,11 +68,11 @@ exec-on-workspace-change = [
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-    inner.horizontal = 16
-    inner.vertical =   16
+    inner.horizontal = 8
+    inner.vertical =   8
     outer.left =       16
-    outer.bottom =     [{ monitor.main = 48 }, 16]
-    outer.top =        16
+    outer.top =        0
+    outer.bottom =     16
     outer.right =      16
 
 # 'main' binding mode declaration
@@ -192,7 +192,7 @@ exec-on-workspace-change = [
   9 = 'main'
 
 [[on-window-detected]]
-    if.app-id = 'app.zen-browser.zen'
+    if.app-id = 'org.mozilla.firefoxdeveloperedition'
     run = ['move-node-to-workspace 1 --focus-follows-window']
 
 [[on-window-detected]]
@@ -209,8 +209,4 @@ exec-on-workspace-change = [
 
 [[on-window-detected]]
     if.app-id = 'com.spotify.client'
-    run = ['move-node-to-workspace 8']
-
-[[on-window-detected]]
-    if.app-id = 'com.openai.chat'
-    run = ['move-node-to-workspace 9']
+    run = ['move-node-to-workspace 9 --focus-follows-window']

@@ -74,14 +74,6 @@ stow: backup
 	@echo "\033[34m[INFO]\033[0m Applying dotfiles to home directory..."
 	@stow --dotfiles -t ${HOME} home || { echo "\033[31m[ERROR]\033[0m Failed to stow home dotfiles"; exit 1; }
 	@echo "\033[32m[SUCCESS]\033[0m Home dotfiles applied"
-	
-	@echo "\033[34m[INFO]\033[0m Applying Übersicht configuration..."
-	@if [ -d "${HOME}/Library/Application Support/Übersicht" ]; then \
-		stow -t "${HOME}/Library/Application Support/Übersicht" ubersicht || { echo "\033[31m[ERROR]\033[0m Failed to stow Übersicht config"; exit 1; }; \
-		echo "\033[32m[SUCCESS]\033[0m Übersicht configuration applied"; \
-	else \
-		echo "\033[33m[WARNING]\033[0m Übersicht not found, skipping widget configuration"; \
-	fi
 
 # Install packages with validation
 install:
@@ -114,9 +106,6 @@ clean:
 	if [[ $$REPLY =~ ^[Yy]$$ ]]; then \
 		echo "\033[34m[INFO]\033[0m Removing stowed dotfiles..."; \
 		stow --dotfiles -D -t ${HOME} home || true; \
-		if [ -d "${HOME}/Library/Application Support/Übersicht" ]; then \
-			stow -D -t "${HOME}/Library/Application Support/Übersicht" ubersicht || true; \
-		fi; \
 		echo "\033[32m[SUCCESS]\033[0m Dotfiles removed"; \
 	else \
 		echo "\033[34m[INFO]\033[0m Operation cancelled"; \

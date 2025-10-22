@@ -1,7 +1,5 @@
 tap "nikitabobko/tap"
 
-cask_args appdir: "~/Applications", require_sha: true
-
 brew "ast-grep"
 brew "bat"
 brew "composer"
@@ -19,10 +17,10 @@ brew "powerlevel10k"
 brew "ripgrep"
 brew "stow"
 
+cask_args appdir: "~/Applications", require_sha: true
+
 cask "font-hack-nerd-font"
 cask "nikitabobko/tap/aerospace"
 cask "orbstack"
 cask "slack"
-cask "ubersicht"
-cask "zen"
 cask "visual-studio-code"
