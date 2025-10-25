@@ -1,20 +1,11 @@
 tap "nikitabobko/tap"
 
-brew "ast-grep"
-brew "bat"
-brew "composer"
-brew "coreutils"
-brew "ctop"
 brew "gh"
 brew "git"
 brew "go-task"
-brew "lazygit"
 brew "make"
-brew "mkcert"
-brew "neovim"
 brew "php"
 brew "powerlevel10k"
-brew "ripgrep"
 brew "stow"
 
 cask_args appdir: "~/Applications", require_sha: true

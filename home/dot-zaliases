@@ -4,7 +4,4 @@ alias dcr="dc run --rm --no-deps"
 alias dce="dc exec -it"
 
 ## MISC
-alias tree="tree --dirsfirst --sort name -C -L 1"
-alias lc="colorls -A --sd --gs -t"
 alias g="git"
-alias dotfiles="make -C ~/.dotfiles"
