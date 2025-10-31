@@ -1,6 +1,10 @@
 [alias]
 	amend = commit --amend
 	undo = reset --soft HEAD~1
+	pl = pull
+	ckt = checkout
+	b = branch
+	p = push
 
 [core]
 	excludesFile = ~/.gitignore
