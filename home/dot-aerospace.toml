@@ -181,7 +181,7 @@ automatically-unhide-macos-hidden-apps = true
   9 = 'main'
 
 [[on-window-detected]]
-    if.app-id = 'org.mozilla.firefoxdeveloperedition'
+    if.app-id = 'com.apple.Safari'
     run = ['move-node-to-workspace 1 --focus-follows-window']
 
 [[on-window-detected]]
