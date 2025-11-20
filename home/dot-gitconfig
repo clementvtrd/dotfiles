@@ -13,7 +13,7 @@
 [user]
 	name = Clément Vétillard
 	email = 84911237+clementvtrd@users.noreply.github.com
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHn/FhaZYeWo1TboQyMI3LMPyOiyi0aWuYCBaWhhEETn
+  	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHn/FhaZYeWo1TboQyMI3LMPyOiyi0aWuYCBaWhhEETn
 
 [gpg]
   format = ssh
