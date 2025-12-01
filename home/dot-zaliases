@@ -5,3 +5,5 @@ alias dce="dc exec -it"
 
 ## MISC
 alias g="git"
+alias lg="lazygit"
+
