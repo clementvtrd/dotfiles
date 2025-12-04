@@ -1,42 +1,27 @@
 [alias]
-	amend = commit --amend
-	undo = reset --soft HEAD~1
-	pl = pull
-	ckt = checkout
-	b = branch
-	p = push
+  amend = commit --amend
+  undo = reset --soft HEAD~1
 
 [core]
-	excludesFile = ~/.gitignore
-	autocrlf = input
+  excludesFile = ~/.gitignore
+  autocrlf = input
 
 [user]
-	name = Clément Vétillard
-	email = 84911237+clementvtrd@users.noreply.github.com
-  	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHn/FhaZYeWo1TboQyMI3LMPyOiyi0aWuYCBaWhhEETn
+  name = Clément Vétillard
+  email = 84911237+clementvtrd@users.noreply.github.com
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHn/FhaZYeWo1TboQyMI3LMPyOiyi0aWuYCBaWhhEETn
 
 [gpg]
   format = ssh
-
-[gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 
 [commit]
   gpgsign = true
 
 [push]
-	autoSetupRemote = true
-	default = simple
-	autoSetupRemote = true
-
-[filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+  autoSetupRemote = true
+  default = simple
+  autoSetupRemote = true
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
 
-[pull]
-	rebase = true
