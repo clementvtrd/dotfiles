@@ -1,25 +1,28 @@
-default: init dependencies stow install
+.PHONY: default init dependencies stow install shell
+
+default: init dependencies stow install shell
 
 init:
-  @if [ ! -d /usr/local/bin ]; then \
-    sudo mkdir -p /usr/local/bin
-  fi
+	@if [ ! -d /usr/local/bin ]; then \
+		sudo mkdir -p /usr/local/bin; \
+	fi
 
 dependencies:
-  @if ! command -v brew > /dev/null; then \
-    /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
-  fi
+	@if ! command -v brew >/dev/null 2>&1; then \
+		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
+	fi
 
 stow:
-  @if ! command -v stow > /dev/null; then \
-    brew install stow \
-  fi
-
-  @stow --dotfiles -t ${HOME} home
+	@if ! command -v stow >/dev/null 2>&1; then \
+		brew install stow; \
+	fi
+	stow --dotfiles -t "${HOME}" home
 
 install:
-  @if command -v brew > /dev/null; then \
-    arch -arm64 brew bundle --global \
-  fi
+	@if command -v brew >/dev/null 2>&1; then \
+		arch -arm64 brew bundle --global; \
+	fi
 
-.PHONY: default init dependencies stow install
+shell:
+	@sudo sh -c 'echo /opt/homebrew/bin/fish >> /etc/shells' || true
+	@chsh -s $$(which fish)
