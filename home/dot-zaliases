@@ -1,9 +1,0 @@
-## DOCKER
-alias dc="docker compose"
-alias dcr="dc run --rm --no-deps"
-alias dce="dc exec -it"
-
-## MISC
-alias g="git"
-alias lg="lazygit"
-

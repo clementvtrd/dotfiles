@@ -1,31 +1,48 @@
-cask_args appdir: "~/Applications", require_sha: true
-
-brew "ctop"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
+# Simple, fast and user-friendly alternative to find
 brew "fd"
+# User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
+# Command-line fuzzy finder written in Go
 brew "fzf"
+# GitHub command-line tool
 brew "gh"
+# Distributed revision control system
 brew "git"
+# Task is a task runner/build tool that aims to be simpler and easier to use
 brew "go-task"
-brew "golang"
+# Simple terminal UI for git commands
 brew "lazygit"
+# Utility for directing compilation
 brew "make"
+# Drop-in replacement for MySQL
 brew "mariadb"
+# Simple tool to make locally trusted development certificates
 brew "mkcert"
+# Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Manage multiple Node.js versions
 brew "nvm"
-brew "openssl"
+# General-purpose scripting language
 brew "php"
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Parser generator tool
 brew "tree-sitter-cli"
+# Internet file retriever
 brew "wget"
-
+# App for managing battery charging. (Also installs a CLI on first use.)
 cask "battery"
-cask "firefox@developer-edition"
-cask "font-fira-code-nerd-font"
-cask "font-hack-nerd-font"
-cask "iterm2"
-cask "orbstack"
-cask "slack"
-cask "visual-studio-code"
+cask "font-fira-code-nerd-font", args: { appdir: "~/Applications" }
+cask "font-hack-nerd-font", args: { appdir: "~/Applications" }
+# Terminal emulator as alternative to Apple's Terminal app
+cask "iterm2", args: { appdir: "~/Applications" }
+# Replacement for Docker Desktop
+cask "orbstack", args: { appdir: "~/Applications" }
+# Team communication and collaboration software
+cask "slack", args: { appdir: "~/Applications" }
+# Open-source code editor
+cask "visual-studio-code", args: { appdir: "~/Applications" }

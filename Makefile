@@ -20,7 +20,7 @@ stow:
 
 install:
 	@if command -v brew >/dev/null 2>&1; then \
-		arch -arm64 brew bundle --global; \
+		arch -arm64 brew bundle --global check || arch -arm64 brew bundle --global install; \
 	fi
 
 shell:
