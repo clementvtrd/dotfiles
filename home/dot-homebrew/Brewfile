@@ -47,3 +47,5 @@ cask "slack", args: { appdir: "~/Applications" }
 # Open-source code editor
 cask "visual-studio-code", args: { appdir: "~/Applications" }
 brew "lazyssh"
+tap "nikitabobko/tap"
+cask "nikitabobko/tap/aerospace"
