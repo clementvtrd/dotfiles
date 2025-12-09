@@ -1,4 +1,4 @@
-.PHONY: default init dependencies stow install shell
+.PHONY: default init dependencies stow install shell fonts-cascadia
 
 default: init dependencies stow install shell
 
@@ -26,3 +26,6 @@ install:
 shell:
 	@sudo sh -c 'echo /opt/homebrew/bin/fish >> /etc/shells' || true
 	@chsh -s $$(which fish)
+
+fonts-cascadia:
+	@bash ./home/bin/install-cascadia-macos.sh
