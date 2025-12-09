@@ -36,8 +36,6 @@ brew "tree-sitter-cli"
 brew "wget"
 # App for managing battery charging. (Also installs a CLI on first use.)
 cask "battery"
-cask "font-fira-code-nerd-font", args: { appdir: "~/Applications" }
-cask "font-hack-nerd-font", args: { appdir: "~/Applications" }
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2", args: { appdir: "~/Applications" }
 # Replacement for Docker Desktop
@@ -49,3 +47,4 @@ cask "visual-studio-code", args: { appdir: "~/Applications" }
 brew "lazyssh"
 tap "nikitabobko/tap"
 cask "nikitabobko/tap/aerospace"
+brew "ctop"

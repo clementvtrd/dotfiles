@@ -57,10 +57,10 @@ automatically-unhide-macos-hidden-apps = true
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-    inner.horizontal = 8
-    inner.vertical =   8
+    inner.horizontal = 16
+    inner.vertical =   16
     outer.left =       16
-    outer.top =        0
+    outer.top =        [{ monitor.main = 0 }, 16]
     outer.bottom =     16
     outer.right =      16
 
@@ -181,7 +181,7 @@ automatically-unhide-macos-hidden-apps = true
   9 = 'main'
 
 [[on-window-detected]]
-    if.app-id = 'com.apple.Safari'
+    if.app-id = 'company.thebrowser.Browser'
     run = ['move-node-to-workspace 1 --focus-follows-window']
 
 [[on-window-detected]]
@@ -195,4 +195,9 @@ automatically-unhide-macos-hidden-apps = true
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap'
     run = ['move-node-to-workspace 4 --focus-follows-window']
+
+[[on-window-detected]]
+    if.app-id = 'com.spotify.client'
+    if.window-title-regex-substring = '(.*) • (.*)'
+    run = ['layout floating']
 
