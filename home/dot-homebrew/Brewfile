@@ -1,3 +1,5 @@
+tap "nikitabobko/tap"
+
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
 # Simple, fast and user-friendly alternative to find
@@ -22,8 +24,6 @@ brew "mariadb"
 brew "mkcert"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Manage multiple Node.js versions
-brew "nvm"
 # General-purpose scripting language
 brew "php"
 # Search tool like grep and The Silver Searcher
@@ -34,6 +34,11 @@ brew "stow"
 brew "tree-sitter-cli"
 # Internet file retriever
 brew "wget"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
+
+# AeroSpace is an i3-like tiling window manager for macOS
+cask "aerospace"
 # App for managing battery charging. (Also installs a CLI on first use.)
 cask "battery"
 # Terminal emulator as alternative to Apple's Terminal app
@@ -44,7 +49,3 @@ cask "orbstack", args: { appdir: "~/Applications" }
 cask "slack", args: { appdir: "~/Applications" }
 # Open-source code editor
 cask "visual-studio-code", args: { appdir: "~/Applications" }
-brew "lazyssh"
-tap "nikitabobko/tap"
-cask "nikitabobko/tap/aerospace"
-brew "ctop"
