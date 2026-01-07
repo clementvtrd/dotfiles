@@ -3,16 +3,14 @@
   undo = reset --soft HEAD~1
 
 [core]
+  editor = "nvim"
   excludesFile = ~/.gitignore
   autocrlf = input
 
 [user]
   name = Clément Vétillard
   email = 84911237+clementvtrd@users.noreply.github.com
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHn/FhaZYeWo1TboQyMI3LMPyOiyi0aWuYCBaWhhEETn
-
-[gpg]
-  format = ssh
+  signingkey = 2849DDDF30E46315
 
 [commit]
   gpgsign = true
@@ -24,4 +22,3 @@
 
 [init]
   defaultBranch = main
-

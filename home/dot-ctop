@@ -1,0 +1,10 @@
+[options]
+  columns = "status,name,ports,cpu,cpus,mem"
+  filterStr = ""
+  sortField = "name"
+
+[toggles]
+  allContainers = false
+  enableHeader = true
+  fullRowCursor = true
+  sortReversed = false

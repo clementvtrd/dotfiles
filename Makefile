@@ -29,3 +29,4 @@ shell:
 
 fonts-cascadia:
 	@bash ./home/bin/install-cascadia-macos.sh
+

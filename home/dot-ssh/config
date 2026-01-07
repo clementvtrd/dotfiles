@@ -1,7 +1,2 @@
 Include ~/.orbstack/ssh/config
 Include config.d/*
-Include conf.d/*
-
-Host github.com
-  AddKeysToAgent yes
-  IdentityFile ~/.ssh/GitHub

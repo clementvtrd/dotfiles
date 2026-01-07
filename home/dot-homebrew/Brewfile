@@ -49,3 +49,6 @@ cask "orbstack", args: { appdir: "~/Applications" }
 cask "slack", args: { appdir: "~/Applications" }
 # Open-source code editor
 cask "visual-studio-code", args: { appdir: "~/Applications" }
+brew "php-intl"
+brew "gpg"
+brew "ctop"
