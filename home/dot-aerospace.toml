@@ -181,11 +181,7 @@ automatically-unhide-macos-hidden-apps = true
   9 = 'main'
 
 [[on-window-detected]]
-    if.app-id = 'com.operasoftware.OperaAir'
-    run = ['move-node-to-workspace 1 --focus-follows-window']
-
-[[on-window-detected]]
-    if.app-id = 'com.apple.Safari'
+    if.app-id = 'org.mozilla.firefox'
     run = ['move-node-to-workspace 1 --focus-follows-window']
 
 [[on-window-detected]]
