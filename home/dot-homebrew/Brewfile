@@ -52,3 +52,4 @@ cask "visual-studio-code", args: { appdir: "~/Applications" }
 brew "php-intl"
 brew "gpg"
 brew "ctop"
+cask "1password-cli"
