@@ -1,6 +1,6 @@
-.PHONY: default init dependencies stow install shell fonts-cascadia
+.PHONY: default init dependencies stow install fonts-cascadia
 
-default: init dependencies stow install shell
+default: init dependencies stow install
 
 init:
 	@if [ ! -d /usr/local/bin ]; then \
@@ -22,10 +22,6 @@ install:
 	@if command -v brew >/dev/null 2>&1; then \
 		arch -arm64 brew bundle --global check || arch -arm64 brew bundle --global install; \
 	fi
-
-shell:
-	@sudo sh -c 'echo /opt/homebrew/bin/fish >> /etc/shells' || true
-	@chsh -s $$(which fish)
 
 fonts-cascadia:
 	@bash ./home/bin/install-cascadia-macos.sh
