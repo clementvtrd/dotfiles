@@ -1,5 +1,29 @@
 Include ~/.orbstack/ssh/config
 Include config.d/*
 
-Host *
-	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+#Host *
+  #	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+Host LPV-PROD
+  HostName kks1087.kokiris.net
+  Port 65022
+  User gt107282
+  IdentityFile /Users/clementvtrd/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+
+Host LPV-PREPROD
+  HostName kks1069.kokiris.net
+  Port 65022
+  User gt107282
+  IdentityFile /Users/clementvtrd/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+
+Host LPV-STAGING
+  HostName kks1069.kokiris.net
+  Port 65022
+  User gt107282
+  IdentityFile /Users/clementvtrd/.ssh/id_ed25519
+  IdentitiesOnly yes
+

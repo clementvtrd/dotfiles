@@ -59,7 +59,7 @@ automatically-unhide-macos-hidden-apps = true
 [gaps]
     inner.horizontal = 16
     inner.vertical =   16
-    outer.left =       32
+    outer.left =       [{ monitor.main = 8 }, 32]
     outer.top =        8
     outer.bottom =     32
     outer.right =      32
@@ -172,7 +172,7 @@ automatically-unhide-macos-hidden-apps = true
 [workspace-to-monitor-force-assignment]
   1 = 'built-in'
   2 = ['secondary', 'TERRA 2463W', 'built-in']
-  3 = ['secondary', 'TERRA 2463W', 'HUAWEI AD80HW', 'built-in']
+  3 = ['secondary', 'HUAWEI AD80HW', 'TERRA 2463W', 'built-in']
   4 = 'built-in'
   5 = 'built-in'
   6 = 'built-in'

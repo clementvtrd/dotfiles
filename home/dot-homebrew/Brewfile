@@ -17,7 +17,6 @@ brew "lazygit"
 # Utility for directing compilation
 brew "make"
 # Drop-in replacement for MySQL
-brew "mariadb"
 # Simple tool to make locally trusted development certificates
 brew "mkcert"
 # Ambitious Vim-fork focused on extensibility and agility
@@ -50,8 +49,6 @@ cask "visual-studio-code", args: { appdir: "~/Applications" }
 brew "php-intl"
 brew "gpg"
 brew "ctop"
-cask "1password-cli"
-brew "go"
 cask "copilot-cli"
 brew "nvm"
 brew "powerlevel10k"
