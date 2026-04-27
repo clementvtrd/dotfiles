@@ -3,7 +3,6 @@
   undo = reset --soft HEAD~1
 
 [core]
-  editor = "nvim"
   excludesFile = ~/.gitignore
   autocrlf = input
 

@@ -1,54 +1,35 @@
 tap "nikitabobko/tap"
 
-# Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
-# Simple, fast and user-friendly alternative to find
-brew "fd"
-# Command-line fuzzy finder written in Go
 brew "fzf"
-# GitHub command-line tool
 brew "gh"
-# Distributed revision control system
 brew "git"
-# Task is a task runner/build tool that aims to be simpler and easier to use
+brew "gnupg"
 brew "go-task"
-# Simple terminal UI for git commands
-brew "lazygit"
-# Utility for directing compilation
 brew "make"
-# Drop-in replacement for MySQL
-# Simple tool to make locally trusted development certificates
 brew "mkcert"
-# Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
-# General-purpose scripting language
-brew "php"
-# Search tool like grep and The Silver Searcher
-brew "ripgrep"
-# Organize software neatly under a single directory tree (e.g. /usr/local)
-brew "stow"
-# Parser generator tool
-brew "tree-sitter-cli"
-# Internet file retriever
-brew "wget"
-# Process YAML, JSON, XML, CSV and properties documents from the CLI
-brew "yq"
-
-# AeroSpace is an i3-like tiling window manager for macOS
-cask "aerospace"
-# App for managing battery charging. (Also installs a CLI on first use.)
-cask "battery"
-# Terminal emulator as alternative to Apple's Terminal app
-cask "iterm2", args: { appdir: "~/Applications" }
-# Replacement for Docker Desktop
-cask "orbstack", args: { appdir: "~/Applications" }
-# Team communication and collaboration software
-cask "slack", args: { appdir: "~/Applications" }
-# Open-source code editor
-cask "visual-studio-code", args: { appdir: "~/Applications" }
-brew "php-intl"
-brew "gpg"
-brew "ctop"
-cask "copilot-cli"
 brew "nvm"
+brew "php"
 brew "powerlevel10k"
+brew "stow"
+
+cask "nikitabobko/tap/aerospace"
+cask "copilot-cli"
+cask "iterm2", args: { appdir: "~/Applications" }
+cask "orbstack", args: { appdir: "~/Applications" }
+cask "slack", args: { appdir: "~/Applications" }
+cask "vscodium"
+
+vscode "bmewburn.vscode-intelephense-client"
+vscode "bradlc.vscode-tailwindcss"
+vscode "clinyong.vscode-css-modules"
+vscode "dbaeumer.vscode-eslint"
+vscode "expo.vscode-expo-theme"
+vscode "expo.vscode-expo-tools"
+vscode "graphql.vscode-graphql-syntax"
+vscode "junstyle.php-cs-fixer"
+vscode "mermaidchart.vscode-mermaid-chart"
+vscode "redhat.vscode-xml"
+vscode "redhat.vscode-yaml"
+vscode "sanderronde.phpstan-vscode"
+vscode "swmansion.react-native-ide"
