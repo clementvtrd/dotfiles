@@ -1,4 +1,4 @@
-.PHONY: default init dependencies stow install fonts-cascadia
+.PHONY: default init dependencies stow install fonts-cascadia wallpaper
 
 default: init dependencies stow install
 
@@ -25,4 +25,7 @@ install:
 
 fonts-cascadia:
 	@bash ./home/bin/install-cascadia-macos.sh
+
+wallpaper:
+	@osascript -e 'tell application "Finder" to set desktop picture to POSIX file "$(PWD)/assets/wallpaper.png"'
 
