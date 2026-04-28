@@ -1,0 +1,35 @@
+tap "nikitabobko/tap"
+
+brew "openssl@3"
+brew "fzf"
+brew "gh"
+brew "git"
+brew "gnupg"
+brew "go-task"
+brew "make"
+brew "mkcert"
+brew "nvm"
+brew "php"
+brew "powerlevel10k"
+brew "stow"
+
+cask "nikitabobko/tap/aerospace"
+cask "copilot-cli"
+cask "iterm2", args: { appdir: "~/Applications" }
+cask "orbstack", args: { appdir: "~/Applications" }
+cask "slack", args: { appdir: "~/Applications" }
+cask "vscodium"
+
+vscode "bmewburn.vscode-intelephense-client"
+vscode "bradlc.vscode-tailwindcss"
+vscode "clinyong.vscode-css-modules"
+vscode "dbaeumer.vscode-eslint"
+vscode "expo.vscode-expo-theme"
+vscode "expo.vscode-expo-tools"
+vscode "graphql.vscode-graphql-syntax"
+vscode "junstyle.php-cs-fixer"
+vscode "mermaidchart.vscode-mermaid-chart"
+vscode "redhat.vscode-xml"
+vscode "redhat.vscode-yaml"
+vscode "sanderronde.phpstan-vscode"
+vscode "swmansion.react-native-ide"

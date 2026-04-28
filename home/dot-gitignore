@@ -1,0 +1,5 @@
+.DS_Store
+docker-compose.override.yaml
+.vscode
+*.sql
+*.gz

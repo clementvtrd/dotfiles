@@ -1,0 +1,20 @@
+{
+    "terminal.integrated.fontFamily": "Cascadia Mono NF",
+    "editor.fontFamily": "Cascadia Code",
+    "redhat.telemetry.enabled": false,
+    "RadonIDE.deviceSettings.location": {
+        "latitude": 50.048653,
+        "longitude": 19.965474,
+        "isDisabled": true
+    },
+    "workbench.colorTheme": "Catppuccin Macchiato",
+    "workbench.iconTheme": "catppuccin-macchiato",
+    "background.enabled": true,
+    "background.fullscreen": {
+        "useFront": true,
+        "images": ["/Users/clementvtrd/dotfiles/assets/wallpaper.png"],
+        "interval": 0,
+        "random": false,
+        "opacity": 0.05
+    }
+}

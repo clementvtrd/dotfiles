@@ -1,0 +1,101 @@
+dependabot() {
+  local dry_run=0
+  local action=""
+  local merge_method="merge"
+  local arg
+
+  for arg in "$@"; do
+    case "$arg" in
+      approve|merge|rebase)
+        action="$arg"
+        ;;
+      --dry-run)
+        dry_run=1
+        ;;
+      --rebase)
+        merge_method="rebase"
+        ;;
+      *)
+        echo "Unknown argument: $arg"
+        return 1
+        ;;
+    esac
+  done
+
+  if [[ -z "$action" ]]; then
+    echo "Usage:"
+    echo "  dependabot approve [--dry-run]"
+    echo "  dependabot merge [--dry-run] [--rebase]"
+    echo "  dependabot rebase [--dry-run]"
+    return 1
+  fi
+
+  local prs
+  if [[ "$action" == "rebase" ]]; then
+    prs=(
+      $(gh pr list \
+        --json number,author \
+        --jq '.[]
+          | select(
+              .author.login == "app/dependabot"
+              or .author.login == "dependabot[bot]"
+          )
+          | .number')
+    )
+  else
+    prs=(
+      $(gh pr list \
+        --json number,author,statusCheckRollup \
+        --jq '.[]
+          | select(
+              (.author.login == "app/dependabot" or .author.login == "dependabot[bot]")
+              and (
+                  .statusCheckRollup == null
+                  or all(.statusCheckRollup[]?;
+                      (.conclusion == "SUCCESS" or .conclusion == "SKIPPED")
+                  )
+              )
+          )
+          | .number')
+    )
+  fi
+
+  if [[ ${#prs[@]} -eq 0 ]]; then
+    echo "No eligible Dependabot PRs found."
+    return 0
+  fi
+
+  local pr
+  for pr in "${prs[@]}"; do
+    if [[ $dry_run -eq 1 ]]; then
+      echo "[dry-run] Would $action PR #$pr"
+      continue
+    fi
+
+    case "$action" in
+      approve)
+        echo "Approving PR #$pr"
+        gh pr review "$pr" --approve
+        ;;
+
+      merge)
+        echo "Merging PR #$pr"
+        if [[ "$merge_method" == "merge" ]]; then
+          gh pr merge "$pr" -dm
+        else
+          gh pr merge "$pr" -dr
+        fi
+
+        if [[ $? -ne 0 ]]; then
+          echo "Merge failed for PR #$pr -> asking Dependabot to rebase"
+          gh pr comment "$pr" --body "@dependabot rebase"
+        fi
+        ;;
+
+      rebase)
+        echo "Asking Dependabot to rebase PR #$pr"
+        gh pr comment "$pr" --body "@dependabot rebase"
+        ;;
+    esac
+  done
+}
