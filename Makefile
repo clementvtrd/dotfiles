@@ -1,4 +1,4 @@
-.PHONY: default init dependencies stow install fonts-cascadia wallpaper
+.PHONY: default init dependencies stow install fonts-cascadia wallpaper vscodium
 
 default: init dependencies stow install
 
@@ -28,4 +28,8 @@ fonts-cascadia:
 
 wallpaper:
 	@osascript -e 'tell application "Finder" to set desktop picture to POSIX file "$(PWD)/assets/wallpaper.png"'
+
+vscodium:
+	@mkdir -p "${HOME}/Library/Application Support/VSCodium/User"
+	@ln -sf "$(PWD)/resources/vscodium/settings.json" "${HOME}/Library/Application Support/VSCodium/User/settings.json"
 
