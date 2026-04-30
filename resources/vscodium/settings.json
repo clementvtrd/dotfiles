@@ -11,4 +11,7 @@
     },
     "workbench.colorTheme": "Catppuccin Latte",
     "workbench.iconTheme": "catppuccin-latte",
+    "workbench.sideBar.location": "right",
+    "workbench.layoutControl.enabled": false,
+    "workbench.browser.showInTitleBar": true
 }

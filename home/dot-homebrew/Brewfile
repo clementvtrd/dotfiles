@@ -22,8 +22,11 @@ cask "orbstack", args: { appdir: "~/Applications" }
 cask "slack", args: { appdir: "~/Applications" }
 cask "vscodium", args: { appdir: "~/Applications" }
 
+vscode "anthropic.claude-code"
 vscode "bmewburn.vscode-intelephense-client"
 vscode "bradlc.vscode-tailwindcss"
+vscode "catppuccin.catppuccin-vsc"
+vscode "catppuccin.catppuccin-vsc-icons"
 vscode "clinyong.vscode-css-modules"
 vscode "dbaeumer.vscode-eslint"
 vscode "expo.vscode-expo-tools"
