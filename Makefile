@@ -20,7 +20,10 @@ stow:
 
 install:
 	@if command -v brew >/dev/null 2>&1; then \
-		arch -arm64 brew bundle --global check || arch -arm64 brew bundle --global install; \
+		brew bundle --global check || brew bundle --global install; \
+	fi
+	@if command -v rtk >/dev/null 2>&1; then \
+		rtk init -g; \
 	fi
 
 fonts-cascadia:
