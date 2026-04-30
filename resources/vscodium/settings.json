@@ -1,20 +1,14 @@
 {
     "terminal.integrated.fontFamily": "Cascadia Mono NF",
     "editor.fontFamily": "Cascadia Code",
+    "editor.fontSize": 16,
+    "editor.fontLigatures": true,
     "redhat.telemetry.enabled": false,
     "RadonIDE.deviceSettings.location": {
         "latitude": 50.048653,
-        "longitude": 19.965474,
+        "longitude": -122.4324,
         "isDisabled": true
     },
-    "workbench.colorTheme": "Catppuccin Macchiato",
-    "workbench.iconTheme": "catppuccin-macchiato",
-    "background.enabled": true,
-    "background.fullscreen": {
-        "useFront": true,
-        "images": ["/Users/clementvtrd/dotfiles/assets/wallpaper.png"],
-        "interval": 0,
-        "random": false,
-        "opacity": 0.05
-    }
+    "workbench.colorTheme": "Catppuccin Latte",
+    "workbench.iconTheme": "catppuccin-latte",
 }
