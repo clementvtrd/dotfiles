@@ -30,7 +30,7 @@ fonts-cascadia:
 	@bash ./home/bin/install-cascadia-macos.sh
 
 wallpaper:
-	@osascript -e 'tell application "Finder" to set desktop picture to POSIX file "$(PWD)/assets/wallpaper.png"'
+	@osascript -e 'tell application "Finder" to set desktop picture to POSIX file "$(PWD)/assets/wallpaper.heic"'
 
 vscodium:
 	@mkdir -p "${HOME}/Library/Application Support/VSCodium/User"
