@@ -1,6 +1,5 @@
 tap "nikitabobko/tap"
 
-brew "openssl@3"
 brew "fzf"
 brew "gh"
 brew "git"
@@ -9,31 +8,17 @@ brew "go-task"
 brew "make"
 brew "mkcert"
 brew "nvm"
+brew "openssl@3"
 brew "php"
 brew "powerlevel10k"
 brew "rtk"
 brew "stow"
 
-cask "nikitabobko/tap/aerospace"
+cask "android-studio", args: { appdir: "~/Applications" }
 cask "claude-code"
 cask "copilot-cli"
 cask "iterm2", args: { appdir: "~/Applications" }
+cask "nikitabobko/tap/aerospace"
 cask "orbstack", args: { appdir: "~/Applications" }
 cask "slack", args: { appdir: "~/Applications" }
-cask "vscodium", args: { appdir: "~/Applications" }
-
-vscode "anthropic.claude-code"
-vscode "bmewburn.vscode-intelephense-client"
-vscode "bradlc.vscode-tailwindcss"
-vscode "catppuccin.catppuccin-vsc"
-vscode "catppuccin.catppuccin-vsc-icons"
-vscode "clinyong.vscode-css-modules"
-vscode "dbaeumer.vscode-eslint"
-vscode "expo.vscode-expo-tools"
-vscode "graphql.vscode-graphql-syntax"
-vscode "junstyle.php-cs-fixer"
-vscode "mermaidchart.vscode-mermaid-chart"
-vscode "redhat.vscode-xml"
-vscode "redhat.vscode-yaml"
-vscode "sanderronde.phpstan-vscode"
-vscode "swmansion.react-native-ide"
+cask "visual-studio-code", args: { appdir: "~/Applications" }
