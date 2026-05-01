@@ -1,6 +1,6 @@
 .PHONY: default init dependencies stow install fonts-cascadia wallpaper
 
-default: init dependencies stow install
+default: init dependencies stow install fonts-cascadia wallpaper vscodium
 
 init:
 	@if [ ! -d /usr/local/bin ]; then \
