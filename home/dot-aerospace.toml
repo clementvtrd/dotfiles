@@ -16,7 +16,7 @@ automatically-unhide-macos-hidden-apps = true
     inner.vertical =   16
     outer.left =       64
     outer.top =        32
-    outer.bottom =     64
+    outer.bottom =     32
     outer.right =      64
 
 [mode.main.binding]
@@ -54,11 +54,15 @@ automatically-unhide-macos-hidden-apps = true
   9 = 'built-in'
 
 [[on-window-detected]]
+    if.app-id = 'com.apple.Safari'
+    run = ['move-node-to-workspace 1 --focus-follows-window']
+
+[[on-window-detected]]
     if.app-id = 'org.mozilla.firefoxdeveloperedition'
     run = ['move-node-to-workspace 1 --focus-follows-window']
 
 [[on-window-detected]]
-    if.app-id = 'com.vscodium'
+    if.app-id = 'com.microsoft.VSCode'
     run = ['move-node-to-workspace 2 --focus-follows-window']
 
 [[on-window-detected]]

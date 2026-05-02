@@ -18,6 +18,9 @@ stow:
 	fi
 	stow --dotfiles -t "${HOME}" home
 
+unstow:
+	stow --dotfiles -t "${HOME}" -D home
+
 install:
 	@if command -v brew >/dev/null 2>&1; then \
 		brew bundle --global check || brew bundle --global install; \
@@ -27,7 +30,7 @@ install:
 	fi
 
 fonts-cascadia:
-	@bash ./home/bin/install-cascadia-macos.sh
+	@bash ./bin/install-cascadia-macos.sh
 
 wallpaper:
 	@osascript -e 'tell application "Finder" to set desktop picture to POSIX file "$(PWD)/assets/wallpaper.heic"'

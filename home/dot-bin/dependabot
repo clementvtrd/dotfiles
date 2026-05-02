@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 dependabot() {
   local dry_run=0
   local action=""
@@ -99,3 +101,5 @@ dependabot() {
     esac
   done
 }
+
+dependabot $@
