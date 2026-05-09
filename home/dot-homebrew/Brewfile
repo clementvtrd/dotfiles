@@ -1,24 +1,9 @@
-tap "nikitabobko/tap"
-
-brew "fzf"
-brew "gh"
-brew "git"
-brew "gnupg"
-brew "go-task"
-brew "make"
-brew "mkcert"
-brew "nvm"
-brew "openssl@3"
-brew "php"
-brew "powerlevel10k"
-brew "rtk"
-brew "stow"
-
-cask "android-studio", args: { appdir: "~/Applications" }
-cask "claude-code"
-cask "copilot-cli"
-cask "iterm2", args: { appdir: "~/Applications" }
-cask "nikitabobko/tap/aerospace"
-cask "orbstack", args: { appdir: "~/Applications" }
-cask "slack", args: { appdir: "~/Applications" }
-cask "visual-studio-code", args: { appdir: "~/Applications" }
+system "zsh -l -c \"brew bundle --file ~/.homebrew/Brewfile.nvim\""
+[
+  "core",
+  "dev",
+  "nvim",
+  "cask",
+].each do |name|
+  system "zsh -l -c \"brew bundle --file ~/.homebrew/Brewfile.#{name}\""
+end

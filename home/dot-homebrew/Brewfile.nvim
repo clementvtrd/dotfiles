@@ -1,0 +1,7 @@
+brew "curl"
+brew "fd"
+brew "fzf"
+brew "lazygit"
+brew "neovim"
+brew "ripgrep"
+brew "tree-sitter-cli"
