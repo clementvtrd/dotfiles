@@ -1,9 +1,8 @@
-system "zsh -l -c \"brew bundle --file ~/.homebrew/Brewfile.nvim\""
 [
+  "cask",
   "core",
   "dev",
   "nvim",
-  "cask",
 ].each do |name|
   system "zsh -l -c \"brew bundle --file ~/.homebrew/Brewfile.#{name}\""
 end

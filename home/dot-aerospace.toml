@@ -9,84 +9,98 @@ default-root-container-orientation = 'auto'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 automatically-unhide-macos-hidden-apps = true
 
+on-focus-changed = [
+  "exec-and-forget osascript -e 'tell application id \"tracesOf.Uebersicht\" to refresh widget id \"simple-bar-index-jsx\"'",
+]
+
+exec-on-workspace-change = [
+  '/bin/zsh',
+  '-c',
+  '/usr/bin/osascript -e "tell application id \"tracesOf.Uebersicht\" to refresh widget id \"simple-bar-index-jsx\""',
+]
+
 [key-mapping]
-    preset = 'qwerty'
+preset = 'qwerty'
 
 [gaps]
-    inner.horizontal = 16
-    inner.vertical =   16
-    outer.left =       64
-    outer.top =        32
-    outer.bottom =     32
-    outer.right =      64
+inner.horizontal = 16
+inner.vertical = 16
+outer.left = 32
+outer.top = 0
+outer.bottom = 32
+outer.right = 32
 
 [mode.main.binding]
-    alt-slash = 'layout tiles horizontal vertical'
-    alt-comma = 'layout accordion horizontal vertical'
-    alt-minus = 'resize smart -50'
-    alt-equal = 'resize smart +50'
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
 
-    alt-1 = 'workspace 1'
-    alt-2 = 'workspace 2'
-    alt-3 = 'workspace 3'
-    alt-4 = 'workspace 4'
-    alt-5 = 'workspace 5'
-    alt-6 = 'workspace 6'
-    alt-7 = 'workspace 7'
-    alt-8 = 'workspace 8'
-    alt-9 = 'workspace 9'
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
 
-    alt-shift-1 = 'move-node-to-workspace 1  --focus-follows-window'
-    alt-shift-2 = 'move-node-to-workspace 2  --focus-follows-window'
-    alt-shift-3 = 'move-node-to-workspace 3  --focus-follows-window'
-    alt-shift-4 = 'move-node-to-workspace 4  --focus-follows-window'
-    alt-shift-5 = 'move-node-to-workspace 5  --focus-follows-window'
-    alt-shift-6 = 'move-node-to-workspace 6  --focus-follows-window'
-    alt-shift-7 = 'move-node-to-workspace 7  --focus-follows-window'
-    alt-shift-8 = 'move-node-to-workspace 8  --focus-follows-window'
-    alt-shift-9 = 'move-node-to-workspace 9  --focus-follows-window'
+alt-shift-1 = 'move-node-to-workspace 1  --focus-follows-window'
+alt-shift-2 = 'move-node-to-workspace 2  --focus-follows-window'
+alt-shift-3 = 'move-node-to-workspace 3  --focus-follows-window'
+alt-shift-4 = 'move-node-to-workspace 4  --focus-follows-window'
+alt-shift-5 = 'move-node-to-workspace 5  --focus-follows-window'
+alt-shift-6 = 'move-node-to-workspace 6  --focus-follows-window'
+alt-shift-7 = 'move-node-to-workspace 7  --focus-follows-window'
+alt-shift-8 = 'move-node-to-workspace 8  --focus-follows-window'
+alt-shift-9 = 'move-node-to-workspace 9  --focus-follows-window'
 
-    alt-tab = 'workspace-back-and-forth'
+alt-tab = 'workspace-back-and-forth'
 
 [workspace-to-monitor-force-assignment]
-  1 = 'built-in'
-  2 = ['secondary', 'built-in']
-  3 = ['secondary', 'built-in']
-  4 = 'built-in'
-  5 = 'built-in'
-  6 = 'built-in'
-  7 = 'built-in'
-  8 = 'built-in'
-  9 = 'built-in'
+1 = 'built-in'
+2 = ['secondary', 'built-in']
+3 = ['secondary', 'built-in']
+4 = 'built-in'
+5 = 'built-in'
+6 = 'built-in'
+7 = 'built-in'
+8 = 'built-in'
+9 = 'built-in'
 
 [[on-window-detected]]
-    if.app-id = 'com.apple.Safari'
-    run = ['move-node-to-workspace 1 --focus-follows-window']
+if.app-id = 'com.apple.Safari'
+run = ['move-node-to-workspace 1 --focus-follows-window']
 
 [[on-window-detected]]
-    if.app-id = 'com.brave.Browser'
-    run = ['move-node-to-workspace 1 --focus-follows-window']
+if.app-id = 'com.brave.Browser'
+run = ['move-node-to-workspace 1 --focus-follows-window']
 
 [[on-window-detected]]
-    if.app-id = 'org.mozilla.firefoxdeveloperedition'
-    run = ['move-node-to-workspace 1 --focus-follows-window']
+if.app-id = 'org.mozilla.firefoxdeveloperedition'
+run = ['move-node-to-workspace 1 --focus-follows-window']
 
 [[on-window-detected]]
-    if.app-id = 'com.microsoft.VSCode'
-    run = ['move-node-to-workspace 2 --focus-follows-window']
+if.app-id = 'com.microsoft.VSCode'
+run = ['move-node-to-workspace 2 --focus-follows-window']
 
 [[on-window-detected]]
-    if.app-id = 'org.tabby'
-    run = ['move-node-to-workspace 3 --focus-follows-window']
+if.app-id = 'com.googlecode.iterm2'
+run = ['move-node-to-workspace 2 --focus-follows-window']
 
 [[on-window-detected]]
-    if.app-id = 'com.tinyspeck.slackmacgap'
-    run = ['move-node-to-workspace 4 --focus-follows-window']
+if.app-id = 'dev.warp.Warp-Stable'
+run = ['move-node-to-workspace 2 --focus-follows-window']
 
 [[on-window-detected]]
-    if.app-id = 'com.apple.mail'
-    run = ['move-node-to-workspace 5 --focus-follows-window']
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = ['move-node-to-workspace 4 --focus-follows-window']
 
 [[on-window-detected]]
-    if.app-id = 'com.apple.iCal'
-    run = ['move-node-to-workspace 5 --focus-follows-window']
+if.app-id = 'com.apple.mail'
+run = ['move-node-to-workspace 5 --focus-follows-window']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iCal'
+run = ['move-node-to-workspace 5 --focus-follows-window']
