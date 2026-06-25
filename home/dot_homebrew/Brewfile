@@ -1,0 +1,50 @@
+tap "nikitabobko/tap"
+tap "symfony-cli/tap"
+
+cask "android-studio", args: { appdir: "~/Applications" }
+cask "nikitabobko/tap/aerospace"
+cask "slack", args: { appdir: "~/Applications" }
+cask "visual-studio-code", args: { appdir: "~/Applications" }
+cask "iterm2", args: { appdir: "~/Applications" }
+cask "puremac"
+
+## Core
+brew "git"
+brew "gnupg"
+brew "make"
+brew "openssl@3"
+brew "stow"
+
+## Dev
+brew "gh"
+brew "go-task"
+brew "golang"
+brew "mkcert"
+brew "nvm"
+brew "php"
+brew "rtk"
+brew "croc"
+brew "symfony-cli/tap/symfony-cli"
+cask "ngrok"
+cask "docker/tap/sbx"
+
+## React Native
+cask "zulu@17"
+brew "rbenv"
+
+## LazyVim
+brew "curl"
+brew "fd"
+brew "fzf"
+brew "lazygit"
+brew "neovim"
+brew "ripgrep"
+brew "tree-sitter-cli"
+
+## Shell
+brew "powerlevel10k"
+brew "bat"
+# Replacement for Docker Desktop
+cask "orbstack"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"

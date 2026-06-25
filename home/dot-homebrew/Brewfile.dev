@@ -1,7 +1,0 @@
-brew "gh"
-brew "go-task"
-brew "golang"
-brew "mkcert"
-brew "nvm"
-brew "php"
-brew "rtk"

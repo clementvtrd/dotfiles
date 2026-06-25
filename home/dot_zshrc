@@ -1,0 +1,49 @@
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion# Auto-switch Node.js versions when .nvmrc is present
+autoload -U add-zsh-hook
+
+load_nvm_version() {
+  if [[ -f .nvmrc ]]; then
+    nvm use || nvm install
+  fi
+}
+
+add-zsh-hook chpwd load_nvm_version
+load_nvm_version
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Add React Native deps
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+
+# Color LS completions
+source $(dirname $(gem which colorls))/tab_complete.sh
+
+export PATH="$HOME/.bin:$HOME/.local/bin:$HOME/go/bin:$PATH"
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+
+alias lc='colorls -A --sd'
+alias lg="lazygit"
+alias dcr="docker compose run --rm --no-deps"
+alias dce="docker compose exec"
+alias dc="docker compose"
+alias ngrok="ngrok http --url=skunk-harmless-longhorn.ngrok-free.app"
+
+for f in "$HOME"/.zsh/functions/*; do source "$f"; done
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Ensure a UTF-8 locale so tools like xcpretty don't crash on non-ASCII build output
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8

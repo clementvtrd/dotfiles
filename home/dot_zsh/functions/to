@@ -1,0 +1,19 @@
+_to() {
+  local -a projects
+  projects=("$HOME"/Projects/*/*(N-/:t))
+  compadd -a projects
+}
+compdef _to to
+
+to() {
+  local matches=("$HOME"/Projects/*/"$1"(N-/))
+  if (( ${#matches} == 0 )); then
+    echo "to: no project found: $1" >&2
+    return 1
+  elif (( ${#matches} > 1 )); then
+    echo "to: ambiguous, multiple matches:" >&2
+    printf '  %s\n' "${matches[@]}" >&2
+    return 1
+  fi
+  cd "${matches[1]}"
+}

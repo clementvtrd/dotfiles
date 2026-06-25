@@ -1,0 +1,11 @@
+{
+  "trustedcasks": [
+    "docker/tap/sbx"
+  ],
+  "trustedtaps": [
+    "anomalyco/tap",
+    "docker/tap",
+    "nikitabobko/tap",
+    "symfony-cli/tap"
+  ]
+}

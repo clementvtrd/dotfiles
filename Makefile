@@ -1,25 +1,19 @@
-.PHONY: default init dependencies stow install fonts-cascadia wallpaper
+.PHONY: default init dependencies chezmoi install fonts-cascadia wallpaper
 
-default: init dependencies stow install fonts-cascadia wallpaper
+default: init dependencies install chezmoi fonts-cascadia wallpaper
 
 init:
 	@if [ ! -d /usr/local/bin ]; then \
 		sudo mkdir -p /usr/local/bin; \
 	fi
 
+chezmoi: ~/.config/chezmoi/chezmoi.toml
+	chezmoi apply
+
 dependencies:
 	@if ! command -v brew >/dev/null 2>&1; then \
 		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
 	fi
-
-stow:
-	@if ! command -v stow >/dev/null 2>&1; then \
-		brew install stow; \
-	fi
-	stow --dotfiles -t "${HOME}" home
-
-unstow:
-	stow --dotfiles -t "${HOME}" -D home
 
 install:
 	@if command -v brew >/dev/null 2>&1; then \
@@ -34,3 +28,7 @@ fonts-cascadia:
 
 wallpaper:
 	@osascript -e 'tell application "Finder" to set desktop picture to POSIX file "$(PWD)/assets/wallpaper.heic"'
+
+~/.config/chezmoi/chezmoi.toml:
+	mkdir -p $(dir $@)
+	echo 'sourceDir = "~/dotfiles"' > $@
