@@ -1,0 +1,17 @@
+schemaVersion: "2"
+kind: mixin
+name: oh-my-claude
+displayName: Oh My Claude!
+description: Oh My Claude! is a CLI tool that enhances your experience with the Claude AI assistant.
+
+commands:
+  install:
+    - description: Install Oh My Claude!
+      user: 1000
+      command: |
+        npm i -g oh-my-claude-sisyphus@latest
+        omc setup
+
+    - description: Install mattpocock/skills
+      user: 1000
+      command: npx skills@latest add mattpocock/skills --yes --all --global --agent claude

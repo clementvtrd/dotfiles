@@ -1,0 +1,12 @@
+claude() {
+  local name=${PWD:t}
+  if sbx ls --quiet | grep -qx "$name"; then
+    sbx run --name "$name"
+  else
+    local kit_path="$HOME/.sbx_kits/oh-my-claude.zip"
+    if [[ ! -f $kit_path ]]; then
+      sbx kit pack --output $kit_path "$HOME/.sbx_kits/oh-my-claude"
+    fi
+    sbx run claude --kit $kit_path --name "$name"
+  fi
+}
