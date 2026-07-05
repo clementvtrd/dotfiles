@@ -4,146 +4,58 @@ name: oh-my-claude
 displayName: Oh My Claude!
 description: Oh My Claude! is a CLI tool that enhances your experience with the Claude AI assistant.
 
+agentContext: |
+  ## Git and GitHub CLI usage
+
+  Avoid `git` and `gh` commands that write or mutate state (commit, push, add, reset,
+  checkout, branch, merge, rebase, stash, tag, remote changes, PR/issue creation, edits,
+  comments, merges, closes, releases, etc.) unless the user directly asks for that specific
+  action. Read-only commands (status, diff, log, show, view) are always fine without asking.
+
+  This overrides any other guidance in this file suggesting git/gh writes are pre-authorized
+  by default.
+
+environment:
+  variables:
+    NAMEOMC_NOTIFY: 0
+    LANG: en_US.UTF-8
+    LC_ALL: en_US.UTF-8
+
 sandbox:
-    image: "docker/sandbox-templates:claude-code-docker"
+    image: "docker/sandbox-templates:claude-code"
     aiFilename: CLAUDE.md
     entrypoint:
-        run: [claude]
+        run: [omc, --madmax]
 
 commands:
     install:
-        - description: Install Oh My Claude!
-          user: 1000
-          command: |
-              npm i -g oh-my-claude-sisyphus@latest
-              omc setup
-
         - description: Install mattpocock/skills
           user: 1000
           command: npx skills@latest add mattpocock/skills --yes --all --global --agent claude
 
-    startup:
-        - command:
-              - sh
-              - -c
-              - |
-                  mkdir -p /home/agent/.claude
-                  SETTINGS_FILE="/home/agent/.claude/settings.json"
+        - description: Install rtk
+          user: 1000
+          command: |
+            curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
+            echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 
-                  NEW_SETTINGS='{
-                  "permissions": {
-                      "allow": [
-                      "Bash(rtk find *)",
-                      "Bash(rtk grep *)",
-                      "Bash(rtk rg *)",
-                      "Bash(rtk ls *)",
-                      "Bash(rtk cat *)",
-                      "Bash(rtk head *)",
-                      "Bash(rtk tail *)",
-                      "Bash(rtk sed -n *)",
-                      "Bash(rtk wc *)",
-                      "Bash(rtk sort *)",
-                      "Bash(rtk uniq *)",
-                      "Bash(rtk cut *)",
-                      "Bash(rtk awk *)",
-                      "Bash(rtk git status *)",
-                      "Bash(rtk git diff *)",
-                      "Bash(rtk git log *)",
-                      "Bash(rtk git show *)",
-                      "Bash(rtk git branch --show-current)",
-                      "Bash(rtk git rev-parse *)",
-                      "Bash(rtk gh pr checks *)",
-                      "Bash(rtk gh pr view *)",
-                      "Bash(rtk gh pr diff *)",
-                      "Bash(rtk gh run view *)",
-                      "Bash(rtk gh run list *)",
-                      "Bash(rtk gh pr create *)",
-                      "Bash(rtk gh pr edit *)",
-                      "Bash(rtk gh pr comment *)",
-                      "Bash(rtk gh pr review *)",
-                      "Bash(rtk gh issue create *)",
-                      "Bash(rtk gh issue edit *)",
-                      "Bash(rtk gh issue comment *)"
-                      ],
-                      "deny": [
-                      "Bash(git push *)",
-                      "Bash(git fetch *)",
-                      "Bash(git pull *)",
-                      "Bash(git clone *)",
-                      "Bash(git commit *)",
-                      "Bash(git merge *)",
-                      "Bash(git rebase *)",
-                      "Bash(git cherry-pick *)",
-                      "Bash(git revert *)",
-                      "Bash(git am *)",
-                      "Bash(git apply *)",
-                      "Bash(git add *)",
-                      "Bash(git reset *)",
-                      "Bash(git checkout *)",
-                      "Bash(git switch *)",
-                      "Bash(git restore *)",
-                      "Bash(git clean *)",
-                      "Bash(git stash *)",
-                      "Bash(git tag *)",
-                      "Bash(git branch -d *)",
-                      "Bash(git branch -D *)",
-                      "Bash(git branch -m *)",
-                      "Bash(git remote add *)",
-                      "Bash(git remote remove *)",
-                      "Bash(git remote set-url *)",
-                      "Bash(gh pr create *)",
-                      "Bash(gh pr merge *)",
-                      "Bash(gh pr close *)",
-                      "Bash(gh pr edit *)",
-                      "Bash(gh pr comment *)",
-                      "Bash(gh pr review *)",
-                      "Bash(gh issue create *)",
-                      "Bash(gh issue close *)",
-                      "Bash(gh issue edit *)",
-                      "Bash(gh issue comment *)",
-                      "Bash(gh release *)",
-                      "Bash(gh repo *)",
-                      "Bash(gh gist create *)",
-                      "Bash(rtk git push *)",
-                      "Bash(rtk git fetch *)",
-                      "Bash(rtk git pull *)",
-                      "Bash(rtk git clone *)",
-                      "Bash(rtk git commit *)",
-                      "Bash(rtk git merge *)",
-                      "Bash(rtk git rebase *)",
-                      "Bash(rtk git cherry-pick *)",
-                      "Bash(rtk git revert *)",
-                      "Bash(rtk git am *)",
-                      "Bash(rtk git apply *)",
-                      "Bash(rtk git add *)",
-                      "Bash(rtk git reset *)",
-                      "Bash(rtk git checkout *)",
-                      "Bash(rtk git switch *)",
-                      "Bash(rtk git restore *)",
-                      "Bash(rtk git clean *)",
-                      "Bash(rtk git stash *)",
-                      "Bash(rtk git tag *)",
-                      "Bash(rtk git branch -d *)",
-                      "Bash(rtk git branch -D *)",
-                      "Bash(rtk git branch -m *)",
-                      "Bash(rtk git remote add *)",
-                      "Bash(rtk git remote remove *)",
-                      "Bash(rtk git remote set-url *)",
-                      "Bash(rtk gh release *)",
-                      "Bash(rtk gh repo *)",
-                      "Bash(rtk gh gist create *)"
-                      ]
-                  }
-                  }'
-  
-                  # Si le fichier n'existe pas encore, on part de {}
-                  [ -f "$SETTINGS_FILE" ] || echo '{}' > "$SETTINGS_FILE"
-  
-                  jq -n --slurpfile orig "$SETTINGS_FILE" --argjson new "$NEW_SETTINGS" '
-                  ($orig[0] // {}) as $o |
-                  $o * $new
-                  | .permissions.allow = (( ($o.permissions.allow // []) + ($new.permissions.allow // []) ) | unique)
-                  | .permissions.deny  = (( ($o.permissions.deny  // []) + ($new.permissions.deny  // []) ) | unique)
-                  ' > /tmp/settings.json.tmp && mv /tmp/settings.json.tmp "$SETTINGS_FILE"
-          user: "1000"
-          description: Write user-scope claude settings
+        - description: Install tmux
+          user: 1000
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y tmux
+
+        - description: Update Oh My Claude!
+          user: 1000
+          command: |
+            npm install --global oh-my-claude-sisyphus@latest
+            omc setup
+
+    startup:
+        - description: Install rtk
+          user: 1000
+          command: [rtk, init, --agent, claude, --auto-patch]
+
+        - description: Update mattpocock/skills
+          user: 1000
+          command: [skills, update, -g]
