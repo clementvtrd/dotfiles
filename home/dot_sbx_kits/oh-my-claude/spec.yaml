@@ -22,7 +22,7 @@ environment:
     LC_ALL: en_US.UTF-8
 
 sandbox:
-    image: "docker/sandbox-templates:claude-code"
+    image: "docker/sandbox-templates:claude-code-docker"
     aiFilename: CLAUDE.md
     entrypoint:
         run: [omc, --madmax]
