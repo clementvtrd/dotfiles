@@ -27,6 +27,10 @@ sandbox:
     entrypoint:
         run: [omc, --madmax]
 
+network:
+    allowedDomains:
+        - pecl.php.net:443
+
 commands:
     install:
         - description: Install mattpocock/skills
