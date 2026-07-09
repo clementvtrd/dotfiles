@@ -1,6 +1,7 @@
 {
   "trustedcasks": [
-    "docker/tap/sbx"
+    "docker/tap/sbx",
+    "nikitabobko/tap/aerospace"
   ],
   "trustedtaps": [
     "anomalyco/tap",

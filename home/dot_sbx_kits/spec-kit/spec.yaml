@@ -1,8 +1,7 @@
 schemaVersion: "2"
-kind: sandbox
-name: oh-my-claude
-displayName: Oh My Claude!
-description: Oh My Claude! is a CLI tool that enhances your experience with the Claude AI assistant.
+kind: mixin
+name: spec-kit
+displayName: Github Spec-Kit
 
 agentContext: |
   ## Git and GitHub CLI usage
@@ -21,15 +20,10 @@ environment:
     LANG: en_US.UTF-8
     LC_ALL: en_US.UTF-8
 
-sandbox:
-    image: "docker/sandbox-templates:claude-code-docker"
-    aiFilename: CLAUDE.md
-    entrypoint:
-        run: [omc, --madmax]
-
-network:
-    allowedDomains:
-        - pecl.php.net:443
+caps:
+    network:
+        allow:
+            - pecl.php.net
 
 commands:
     install:
@@ -42,6 +36,10 @@ commands:
           command: |
             curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
             echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+
+        - description: Install Caveman
+          user: 1000
+          command: curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh | bash
 
     startup:
         - description: Install rtk
