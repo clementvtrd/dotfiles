@@ -33,9 +33,9 @@ network:
 
 commands:
     install:
-        - description: Install mattpocock/skills
+        - description: Install Github Spec-Kit
           user: 1000
-          command: npx skills@latest add mattpocock/skills --yes --all --global --agent claude
+          command: uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.12.8
 
         - description: Install rtk
           user: 1000
@@ -43,23 +43,15 @@ commands:
             curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
             echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 
-        - description: Install tmux
-          user: 1000
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y tmux
-
-        - description: Update Oh My Claude!
-          user: 1000
-          command: |
-            npm install --global oh-my-claude-sisyphus@latest
-            omc setup
-
     startup:
         - description: Install rtk
           user: 1000
           command: [rtk, init, --agent, claude, --auto-patch]
 
-        - description: Update mattpocock/skills
+        - description: Upgrade specify
           user: 1000
-          command: [skills, update, -g]
+          command: [specify, self, upgrade]
+
+        - description: Integrate specify with Claude
+          user: 1000
+          command: [specify, init, ., --integration, claude, --script, sh]
