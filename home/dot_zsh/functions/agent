@@ -1,0 +1,13 @@
+agent() {
+  local name=${PWD:t}
+  local kit_path="$HOME/.sbx_kits/my-kit.zip"
+  sbx kit pack --output $kit_path "$HOME/.sbx_kits/my-kit"
+
+  if sbx ls --quiet | grep -qx "$name"; then
+    echo "Agent '$name' already exists. Running it..."
+    sbx run --name "$name"
+  else
+    echo "Agent '$name' does not exist. Creating and running it..."
+    sbx run ${1:-claude} --kit $kit_path --name "$name"
+  fi
+}

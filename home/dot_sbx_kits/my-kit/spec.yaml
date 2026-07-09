@@ -1,7 +1,7 @@
 schemaVersion: "2"
 kind: mixin
-name: spec-kit
-displayName: Github Spec-Kit
+name: my-kit
+displayName: My Kit
 
 agentContext: |
   ## Git and GitHub CLI usage
@@ -16,40 +16,22 @@ agentContext: |
 
 environment:
   variables:
-    NAMEOMC_NOTIFY: 0
     LANG: en_US.UTF-8
     LC_ALL: en_US.UTF-8
 
-caps:
-    network:
-        allow:
-            - pecl.php.net
-
 commands:
     install:
-        - description: Install Github Spec-Kit
-          user: 1000
-          command: uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.12.8
-
         - description: Install rtk
           user: 1000
           command: |
             curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
             echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+            echo 'y' | rtk init --global --auto-patch
 
         - description: Install Caveman
           user: 1000
           command: curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh | bash
 
-    startup:
-        - description: Install rtk
+        - description: Install mattpocock/skills
           user: 1000
-          command: [rtk, init, --agent, claude, --auto-patch]
-
-        - description: Upgrade specify
-          user: 1000
-          command: [specify, self, upgrade]
-
-        - description: Integrate specify with Claude
-          user: 1000
-          command: [specify, init, ., --integration, claude, --script, sh]
+          command: npx skills@latest add mattpocock/skills --yes --all --global --agent claude
