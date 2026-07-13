@@ -44,7 +44,9 @@ commands:
           command: |
             curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
             echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-            echo 'y' | rtk init --global --auto-patch
+            export PATH="$HOME/.local/bin:$PATH"
+            rtk telemetry disable
+            rtk init --global --auto-patch
 
         - description: Install Caveman
           user: 1000
@@ -52,4 +54,8 @@ commands:
 
         - description: Install mattpocock/skills
           user: 1000
-          command: npx
+          command: npx -y skills@latest add mattpocock/skills --yes --all --global --agent '*'
+
+        - description: Install Github Spec Kit
+          user: 1000
+          command: uvx --from git+https://github.com/github/spec-kit.git specify init . --integration claude
