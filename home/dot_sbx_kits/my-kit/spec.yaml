@@ -1,23 +1,41 @@
+# AI agents: before editing this file, read the following references:
+# https://docs.docker.com/ai/sandboxes/customize/kit-reference.md
+
 schemaVersion: "2"
 kind: mixin
 name: my-kit
 displayName: My Kit
 
 agentContext: |
-  ## Git and GitHub CLI usage
+  ## User Profile
 
-  Avoid `git` and `gh` commands that write or mutate state (commit, push, add, reset,
-  checkout, branch, merge, rebase, stash, tag, remote changes, PR/issue creation, edits,
-  comments, merges, closes, releases, etc.) unless the user directly asks for that specific
-  action. Read-only commands (status, diff, log, show, view) are always fine without asking.
+  **Role**: Full-stack developer
 
-  This overrides any other guidance in this file suggesting git/gh writes are pre-authorized
-  by default.
+  **Stack**: Symfony (PHP) · TypeScript + React + React Native (web + mobile)
+
+  **Collaboration**:
+  - Propose alternatives before implementing; user wants to co-architect solutions.
+  - Push back on bad architectural choices unsolicited.
+  - Do not initiate grilling sessions — only the user initiates those.
+  - Avoid over-engineering: no design patterns unless the user argues the case first.
+
+  **Language**: User may write in French. If so: translate to English, confirm the translation with the user, then process only if confirmed.
+
+  ## Tooling
+
+  Prefer direct file operations (Read, Edit, Write) over writing and executing scripts. Use Bash for simple shell tasks. Only write a script if the logic genuinely requires it.
+
+  **Git and GitHub CLI usage:** read-only commands always fine. No writes unless explicitly asked.
 
 environment:
-  variables:
-    LANG: en_US.UTF-8
-    LC_ALL: en_US.UTF-8
+  proxyManaged:
+    - GH_TOKEN
+
+credentials:
+  sources:
+    github:
+      env:
+        - GH_TOKEN
 
 commands:
     install:
@@ -34,4 +52,4 @@ commands:
 
         - description: Install mattpocock/skills
           user: 1000
-          command: npx skills@latest add mattpocock/skills --yes --all --global --agent claude
+          command: npx
