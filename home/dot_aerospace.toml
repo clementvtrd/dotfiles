@@ -76,7 +76,7 @@ ctrl-shift-5 = 'move-node-to-workspace 15 --focus-follows-window'
 15 = ['secondary', 'main']
 
 [[on-window-detected]]
-if.app-id = 'company.thebrowser.dia'
+if.app-id = 'com.apple.Safari'
 run = ['move-node-to-workspace 1 --focus-follows-window']
 
 [[on-window-detected]]
