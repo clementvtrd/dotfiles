@@ -58,4 +58,4 @@ commands:
 
         - description: Install Github Spec Kit
           user: 1000
-          command: uvx --from git+https://github.com/github/spec-kit.git specify init . --integration claude
+          command: uv tool run --from git+https://github.com/github/spec-kit.git specify init . --integration claude
