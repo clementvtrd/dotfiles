@@ -3,8 +3,8 @@
 
 schemaVersion: "2"
 kind: mixin
-name: my-kit
-displayName: My Kit
+name: base-kit
+displayName: Base kit
 
 agentContext: |
   ## User Profile
@@ -27,6 +27,13 @@ agentContext: |
 
   **Git and GitHub CLI usage:** read-only commands always fine. No writes unless explicitly asked.
 
+  ## Response Style
+
+  Terse mode. Fragments OK. Drop articles, filler (just/really/basically/actually), pleasantries
+  (sure/certainly/happy to), hedging. No tool-call narration. No decorative tables or emoji.
+  No multi-paragraph docstrings. Quote shortest decisive error line, not full stack.
+  End-of-turn: one sentence max.
+
 environment:
   proxyManaged:
     - GH_TOKEN
@@ -40,22 +47,10 @@ credentials:
 commands:
     install:
         - description: Install rtk
-          user: 1000
+          user: "1000"
           command: |
             curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
-            echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+            echo 'export PATH="$HOME/.local/bin:$PATH"' >> /etc/sandbox-persistent.sh
             export PATH="$HOME/.local/bin:$PATH"
             rtk telemetry disable
             rtk init --global --auto-patch
-
-        - description: Install Caveman
-          user: 1000
-          command: curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh | bash
-
-        - description: Install mattpocock/skills
-          user: 1000
-          command: npx -y skills@latest add mattpocock/skills --yes --all --global --agent '*'
-
-        - description: Install Github Spec Kit
-          user: 1000
-          command: uv tool run --from git+https://github.com/github/spec-kit.git specify init --integration claude --force --script sh $HOME

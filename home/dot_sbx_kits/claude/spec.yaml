@@ -1,0 +1,13 @@
+# AI agents: before editing this file, read the following references:
+# https://docs.docker.com/ai/sandboxes/customize/kit-reference.md
+
+schemaVersion: "2"
+kind: mixin
+name: claude-speckit
+displayName: Claude Speckit
+
+commands:
+    install:
+        - description: Install Github Spec Kit
+          user: "1000"
+          command: uv tool run --from git+https://github.com/github/spec-kit.git specify init --integration claude --force --script sh $HOME
