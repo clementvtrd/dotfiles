@@ -1,9 +1,6 @@
 .DS_Store
 compose.override.yaml
 .vscode
-
-.claude/settings.local.json
 .omc
+.claude
 
-
-**/.claude/settings.local.json
