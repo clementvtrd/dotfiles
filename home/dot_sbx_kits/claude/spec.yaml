@@ -1,13 +1,25 @@
-# AI agents: before editing this file, read the following references:
-# https://docs.docker.com/ai/sandboxes/customize/kit-reference.md
-
 schemaVersion: "2"
 kind: mixin
-name: claude-speckit
-displayName: Claude Speckit
+name: my-claude
+displayName: My Claude Agent
 
 commands:
     install:
-        - description: Install Github Spec Kit
+        - description: Install rtk
           user: "1000"
-          command: uv tool run --from git+https://github.com/github/spec-kit.git specify init --integration claude --force --script sh $HOME
+          command: |
+            curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
+            echo 'export PATH="$HOME/.local/bin:$PATH"' >> /etc/sandbox-persistent.sh
+            export PATH="$HOME/.local/bin:$PATH"
+            rtk telemetry disable
+            rtk init --global --auto-patch
+
+        - description: Install Specify
+          user: "1000"
+          command: uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+
+        - description: Install Matt Pocock skills
+          user: "1000"
+          command: |
+            claude plugin marketplace add mattpocock/skills
+            claude plugin install mattpocock-skills@mattpocock

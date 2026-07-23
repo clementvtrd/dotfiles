@@ -1,19 +1,11 @@
 agent() {
-  local mode=${1:?Usage: agent <claude|vibe>}
-  if [[ "$mode" != "claude" && "$mode" != "vibe" ]]; then
-    echo "Usage: agent <claude|vibe>" >&2
-    return 1
-  fi
-
   local name=${PWD:t}
-  local common_kit_path="$HOME/.sbx_kits/common.zip"
-  local mode_kit_path="$HOME/.sbx_kits/${mode}.zip"
-  sbx kit pack --output "$common_kit_path" "$HOME/.sbx_kits/common"
-  sbx kit pack --output "$mode_kit_path" "$HOME/.sbx_kits/${mode}"
+  local mode_kit_path="$HOME/.sbx_kits/claude.zip"
+  sbx kit pack --output "$mode_kit_path" "$HOME/.sbx_kits/claude"
 
   if sbx ls --quiet | grep -qx "$name"; then
-    sbx run --name "$name"
+    sbx run claude --name "$name"
   else
-    sbx run "$mode" --kit "$common_kit_path" --kit "$mode_kit_path" --name "$name"
+    sbx run claude --kit "$mode_kit_path" --name "$name"
   fi
 }
