@@ -3,10 +3,8 @@ tap "symfony-cli/tap"
 
 cask "android-studio", args: { appdir: "~/Applications" }
 cask "nikitabobko/tap/aerospace"
-cask "slack", args: { appdir: "~/Applications" }
 cask "visual-studio-code", args: { appdir: "~/Applications" }
 cask "iterm2", args: { appdir: "~/Applications" }
-cask "puremac"
 
 ## Core
 brew "git"
@@ -23,7 +21,8 @@ brew "mkcert"
 brew "nvm"
 brew "php"
 brew "rtk"
-brew "croc"
+brew "yq"
+brew "jq"
 brew "symfony-cli/tap/symfony-cli"
 cask "ngrok"
 cask "docker/tap/sbx"
