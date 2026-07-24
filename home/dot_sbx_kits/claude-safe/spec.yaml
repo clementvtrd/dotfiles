@@ -87,7 +87,8 @@ commands:
                 "Bash(rtk git status *)",
                 "Bash(rtk grep *)",
                 "Bash(rtk ls *)",
-                "Bash(rtk read *)"
+                "Bash(rtk read *)",
+                "Read(/home/agent/.claude/plugins/cache/*"
               ],
               "deny": [
                 "Bash(* cat *)",
