@@ -5,7 +5,7 @@ displayName: Claude Code (with approval prompts)
 description: Claude Code without --dangerously-skip-permissions
 
 sandbox:
-  image: "docker/sandbox-templates:claude-code-docker"
+  image: "docker/sandbox-templates:claude-code"
   aiFilename: CLAUDE.md
   entrypoint:
     run: [claude]
@@ -40,12 +40,6 @@ commands:
     - description: Install Specify
       user: "1000"
       command: uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
-
-    - description: Install Matt Pocock skills
-      user: "1000"
-      command: |
-        claude plugin marketplace add mattpocock/skills
-        claude plugin install mattpocock-skills@mattpocock
 
   startup:
     - description: Write user-scope claude settings
@@ -129,6 +123,17 @@ commands:
                   ]
                 }
               ]
+            },
+            "extraKnownMarketplaces": {
+              "mattpocock": {
+                "source": {
+                  "source": "github",
+                  "repo": "mattpocock/skills"
+                }
+              }
+            },
+            "enabledPlugins": {
+              "mattpocock-skills@mattpocock": true
             }
           }
           JSON
