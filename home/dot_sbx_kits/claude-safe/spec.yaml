@@ -62,9 +62,13 @@ commands:
             "permissions":{
               "defaultMode": "acceptEdits",
               "ask": [
-                "Bash(rtk git commit *)"
+                "Bash(rtk git commit *)",
+                "Edit(Makefile)",
+                "Write(Makefile)"
               ],
               "allow": [
+                "Bash(make *)",
+                "Bash(rtk make *)",
                 "Bash(.specify/scripts/bash/check-prerequisites.sh *)",
                 "Bash(.specify/scripts/bash/common.sh *)",
                 "Bash(.specify/scripts/bash/create-new-feature.sh *)",
