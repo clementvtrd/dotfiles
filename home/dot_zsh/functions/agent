@@ -1,11 +1,11 @@
 agent() {
   local name=${PWD:t}
-  local mode_kit_path="$HOME/.sbx_kits/claude.zip"
-  sbx kit pack --output "$mode_kit_path" "$HOME/.sbx_kits/claude"
+  local mode_kit_path="$HOME/.sbx_kits/claude-safe.zip"
+  sbx kit pack --output "$mode_kit_path" "$HOME/.sbx_kits/claude-safe"
 
   if sbx ls --quiet | grep -qx "$name"; then
-    sbx run claude --name "$name"
+    sbx run claude-safe --name "$name"
   else
-    sbx run claude --kit "$mode_kit_path" --name "$name"
+    sbx run claude-safe --kit "$mode_kit_path" --name "$name"
   fi
 }

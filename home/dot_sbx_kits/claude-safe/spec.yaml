@@ -1,0 +1,109 @@
+schemaVersion: "2"
+kind: sandbox
+name: claude-safe
+displayName: Claude Code (with approval prompts)
+description: Claude Code without --dangerously-skip-permissions
+
+sandbox:
+  image: "docker/sandbox-templates:claude-code-docker"
+  aiFilename: CLAUDE.md
+  entrypoint:
+    run: [claude]
+
+network:
+  serviceDomains:
+    api.anthropic.com: anthropic
+    console.anthropic.com: anthropic
+  serviceAuth:
+    anthropic:
+      headerName: x-api-key
+      valueFormat: "%s"
+  allowedDomains:
+    - "claude.com:443"
+
+credentials:
+  sources:
+    anthropic:
+      env:
+        - ANTHROPIC_API_KEY
+
+commands:
+  install:
+    - description: Install rtk
+      user: "1000"
+      command: |
+        curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
+        echo 'export PATH="$HOME/.local/bin:$PATH"' >> /etc/sandbox-persistent.sh
+        export PATH="$HOME/.local/bin:$PATH"
+        rtk telemetry disable
+        rtk init --global --auto-patch
+
+    - description: Install Specify
+      user: "1000"
+      command: uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+
+    - description: Install Matt Pocock skills
+      user: "1000"
+      command: |
+        claude plugin marketplace add mattpocock/skills
+        claude plugin install mattpocock-skills@mattpocock
+
+  startup:
+    - description: Write user-scope claude settings
+      user: "1000"
+      command:
+        - sh
+        - -c
+        - |
+          mkdir -p /home/agent/.claude
+          cat > /home/agent/.claude/settings.json <<'JSON'
+          {
+            "$schema": "https://json.schemastore.org/claude-code-settings.json",
+            "theme": "auto",
+            "permissions":{
+              "defaultMode": "acceptEdits",
+              "allow": [
+                "Bash(.specify/scripts/bash/check-prerequisites.sh *)",
+                "Bash(.specify/scripts/bash/common.sh *)",
+                "Bash(.specify/scripts/bash/create-new-feature.sh *)",
+                "Bash(.specify/scripts/bash/setup-plan.sh *)",
+                "Bash(.specify/scripts/bash/setup-tasks.sh *)",
+                "Bash(rtk find *)",
+                "Bash(rtk git diff *)",
+                "Bash(rtk git grep *)",
+                "Bash(rtk git log *)",
+                "Bash(rtk git show *)",
+                "Bash(rtk git status *)",
+                "Bash(rtk ls *)",
+                "Bash(rtk read *)"
+              ],
+              "deny": [
+                "Bash(* cat *)",
+                "Bash(* gh issue close *)",
+                "Bash(* gh issue delete *)",
+                "Bash(* gh pr close *)",
+                "Bash(* gh pr create *)",
+                "Bash(* gh pr merge *)",
+                "Bash(* git branch -d *)",
+                "Bash(* git branch -D *)",
+                "Bash(* git cherry-pick *)",
+                "Bash(* git clean *)",
+                "Bash(* git commit *)",
+                "Bash(* git merge *)",
+                "Bash(* git push *)",
+                "Bash(* git rebase *)",
+                "Bash(* git reset *)",
+                "Bash(* git stash drop *)",
+                "Bash(* git tag -d *)",
+                "Bash(* rm *)",
+                "Edit(.env.*)",
+                "Edit(*.env)",
+                "Read(.env.*)",
+                "Read(.git)",
+                "Read(*.env)",
+                "Write(.env.*)",
+                "Write(*.env)"
+              ]
+            }
+          }
+          JSON
