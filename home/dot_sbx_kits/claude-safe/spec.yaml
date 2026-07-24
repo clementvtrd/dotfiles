@@ -5,7 +5,7 @@ displayName: Claude Code (with approval prompts)
 description: Claude Code without --dangerously-skip-permissions
 
 sandbox:
-  image: "docker/sandbox-templates:claude-code"
+  image: "docker/sandbox-templates:claude-code-docker"
   aiFilename: CLAUDE.md
   entrypoint:
     run: [claude]
@@ -53,6 +53,7 @@ commands:
           {
             "$schema": "https://json.schemastore.org/claude-code-settings.json",
             "theme": "auto",
+            "model": "opus[1m]",
             "permissions":{
               "defaultMode": "acceptEdits",
               "ask": [
