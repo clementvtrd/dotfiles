@@ -1,6 +1,6 @@
 .DS_Store
 compose.override.yaml
 .vscode
-.omc
+.agents
 .claude
 .specify
