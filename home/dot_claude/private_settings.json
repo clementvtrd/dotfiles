@@ -91,5 +91,10 @@
   },
   "env": {
     "CLAUDE_CODE_SUBPROCESS_ENV_SCRUB": "1"
+  },
+  "voice": {
+    "enabled": true,
+    "mode": "hold",
+    "autoSubmit": true
   }
 }
