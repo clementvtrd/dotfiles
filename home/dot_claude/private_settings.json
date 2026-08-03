@@ -23,8 +23,7 @@
       "Bash(rtk make *)",
       "Bash(rtk read *)",
       "Edit(/Users/clementvtrd/.claude/plugins/cache/**)",
-      "Read(/Users/clementvtrd/.claude/plugins/cache/**)",
-      "Write(/Users/clementvtrd/.claude/plugins/cache/**)"
+      "Read(/Users/clementvtrd/.claude/plugins/cache/**)"
     ],
     "deny": [
       "Bash(cat *)",
@@ -34,17 +33,12 @@
       "Read(.env.*)",
       "Read(.env)",
       "Read(*.env)",
-      "Write(.env.*)",
-      "Write(.env)",
-      "Write(*.env)",
       "Edit(.git)",
-      "Read(.git)",
-      "Write(.git)"
+      "Read(.git)"
     ],
     "ask": [
       "Bash(rtk git commit *)",
-      "Edit(Makefile)",
-      "Write(Makefile)"
+      "Edit(Makefile)"
     ],
     "defaultMode": "acceptEdits"
   },
