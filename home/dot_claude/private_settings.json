@@ -1,19 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "theme": "auto",
   "permissions": {
-    "defaultMode": "acceptEdits",
-    "ask": [
-      "Bash(rtk git commit *)",
-      "Edit(Makefile)",
-      "Write(Makefile)"
-    ],
     "allow": [
       "Bash(git rev-parse --show-toplevel)",
       "Bash(make *)",
       "Bash(obsidian *)",
       "Bash(python3 ~/.claude/skills/obs-daily/scripts/log_day.py)",
       "Bash(rtk find *)",
+      "Bash(rtk git add *)",
       "Bash(rtk git diff *)",
       "Bash(rtk git diff)",
       "Bash(rtk git grep *)",
@@ -46,7 +40,13 @@
       "Edit(.git)",
       "Read(.git)",
       "Write(.git)"
-    ]
+    ],
+    "ask": [
+      "Bash(rtk git commit *)",
+      "Edit(Makefile)",
+      "Write(Makefile)"
+    ],
+    "defaultMode": "acceptEdits"
   },
   "hooks": {
     "PreToolUse": [
@@ -62,7 +62,8 @@
     ]
   },
   "enabledPlugins": {
-    "mattpocock-skills@mattpocock": true
+    "mattpocock-skills@mattpocock": true,
+    "claude-hud@claude-hud": true
   },
   "extraKnownMarketplaces": {
     "mattpocock": {
@@ -70,6 +71,18 @@
         "source": "github",
         "repo": "mattpocock/skills"
       }
+    },
+    "claude-hud": {
+      "source": {
+        "source": "github",
+        "repo": "jarrodwatts/claude-hud"
+      }
     }
+  },
+  "theme": "auto",
+  "statusLine": {
+    "type": "command",
+    "command": "bash -c 'cols=${COLUMNS:-}; case \"$cols\" in \"\"|*[!0-9]*) cols=$(stty size </dev/tty 2>/dev/null | awk '\"'\"'{print }'\"'\"');; esac; case \"$cols\" in \"\"|*[!0-9]*) cols=120;; esac; export COLUMNS=$(( cols > 4 ? cols - 4 : 1 )); plugin_dir=$(ls -d \"${CLAUDE_CONFIG_DIR:-$HOME/.claude}\"/plugins/cache/*/claude-hud/*/ 2>/dev/null | awk -F/ '\"'\"'{ print $(NF-1) \"\\t\" $(0) }'\"'\"' | grep -E '\"'\"'^[0-9]+\\.[0-9]+\\.[0-9]+[[:space:]]'\"'\"' | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n | tail -1 | cut -f2-); exec \"/Users/clementvtrd/.nvm/versions/node/v24.14.0/bin/node\" \"${plugin_dir}dist/index.js\"'",
+    "refreshInterval": 5
   }
 }

@@ -3,4 +3,8 @@ compose.override.yaml
 .vscode
 .agents
 .claude
-.specify
+.specify/*
+!.specify/memory/
+.specify/memory/*
+!.specify/memory/constitution.md
+

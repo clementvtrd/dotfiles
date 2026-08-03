@@ -1,10 +1,12 @@
 tap "nikitabobko/tap"
 tap "symfony-cli/tap"
+tap "cordwainersmith/claudoscope"
 
 cask "android-studio", args: { appdir: "~/Applications" }
 cask "nikitabobko/tap/aerospace"
 cask "visual-studio-code", args: { appdir: "~/Applications" }
 cask "iterm2", args: { appdir: "~/Applications" }
+cask "claudoscope", args: { appdir: "~/Applications" }
 
 ## Core
 brew "git"
