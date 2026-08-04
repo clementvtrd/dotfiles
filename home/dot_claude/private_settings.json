@@ -7,6 +7,8 @@
     "allow": [
       "Bash(make *)",
       "Bash(rtk find *)",
+      "Bash(rtk gh issue view *)",
+      "Bash(rtk gh pr view *)",
       "Bash(rtk git add *)",
       "Bash(rtk git diff *)",
       "Bash(rtk git diff)",
@@ -98,6 +100,12 @@
           "path": "*.env",
           "mode": "deny"
         }
+      ]
+    },
+    "network": {
+      "allowedDomains": [
+        "api.github.com",
+        "github.com"
       ]
     }
   },
