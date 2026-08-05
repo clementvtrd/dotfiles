@@ -60,7 +60,7 @@
       }
     ]
   },
-  "disableSkillShellExecution": true,
+  "disableSkillShellExecution": false,
   "statusLine": {
     "type": "command",
     "command": "bash -c 'cols=${COLUMNS:-}; case \"$cols\" in \"\"|*[!0-9]*) cols=$(stty size </dev/tty 2>/dev/null | awk '\"'\"'{print }'\"'\"');; esac; case \"$cols\" in \"\"|*[!0-9]*) cols=120;; esac; export COLUMNS=$(( cols > 4 ? cols - 4 : 1 )); plugin_dir=$(ls -d \"${CLAUDE_CONFIG_DIR:-$HOME/.claude}\"/plugins/cache/*/claude-hud/*/ 2>/dev/null | awk -F/ '\"'\"'{ print $(NF-1) \"\\t\" $(0) }'\"'\"' | grep -E '\"'\"'^[0-9]+\\.[0-9]+\\.[0-9]+[[:space:]]'\"'\"' | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n | tail -1 | cut -f2-); exec \"/Users/clementvtrd/.nvm/versions/node/v24.14.0/bin/node\" \"${plugin_dir}dist/index.js\"'",
@@ -68,7 +68,8 @@
   },
   "enabledPlugins": {
     "mattpocock-skills@mattpocock": true,
-    "claude-hud@claude-hud": true
+    "claude-hud@claude-hud": true,
+    "php-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "mattpocock": {
@@ -86,6 +87,13 @@
   },
   "sandbox": {
     "enabled": true,
+    "network": {
+      "allowedDomains": [
+        "api.github.com",
+        "github.com",
+        "formulae.brew.sh"
+      ]
+    },
     "credentials": {
       "files": [
         {
@@ -100,12 +108,6 @@
           "path": "*.env",
           "mode": "deny"
         }
-      ]
-    },
-    "network": {
-      "allowedDomains": [
-        "api.github.com",
-        "github.com"
       ]
     }
   },

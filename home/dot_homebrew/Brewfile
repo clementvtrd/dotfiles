@@ -27,7 +27,6 @@ brew "yq"
 brew "jq"
 brew "symfony-cli/tap/symfony-cli"
 cask "ngrok"
-cask "docker/tap/sbx"
 
 ## React Native
 cask "zulu@17"
