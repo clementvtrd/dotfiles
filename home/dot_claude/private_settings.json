@@ -85,32 +85,6 @@
       }
     }
   },
-  "sandbox": {
-    "enabled": true,
-    "network": {
-      "allowedDomains": [
-        "api.github.com",
-        "github.com",
-        "formulae.brew.sh"
-      ]
-    },
-    "credentials": {
-      "files": [
-        {
-          "path": ".env",
-          "mode": "deny"
-        },
-        {
-          "path": ".env.*",
-          "mode": "deny"
-        },
-        {
-          "path": "*.env",
-          "mode": "deny"
-        }
-      ]
-    }
-  },
   "voice": {
     "enabled": true,
     "mode": "hold",

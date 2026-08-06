@@ -38,7 +38,6 @@ alias dcr="docker compose run --rm --no-deps"
 alias dce="docker compose exec"
 alias dc="docker compose"
 alias ngrok="ngrok http --url=skunk-harmless-longhorn.ngrok-free.app"
-alias my-claude="CLAUDE_CONFIG_DIR=~/.my-claude claude"
 
 for f in "$HOME"/.zsh/functions/*; do source "$f"; done
 

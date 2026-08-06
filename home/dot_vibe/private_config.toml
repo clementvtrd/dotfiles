@@ -1,0 +1,5 @@
+theme = "catppuccin-latte"
+voice_mode_enabled = true
+narrator_enabled = true
+active_model = ""
+mcp_servers = []
