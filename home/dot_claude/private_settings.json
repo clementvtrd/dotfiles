@@ -68,8 +68,9 @@
   },
   "enabledPlugins": {
     "mattpocock-skills@mattpocock": true,
-    "claude-hud@claude-hud": true,
-    "php-lsp@claude-plugins-official": true
+    "php-lsp@claude-plugins-official": true,
+    "omc@oh-my-claudecode": true,
+    "oh-my-claudecode@omc": true
   },
   "extraKnownMarketplaces": {
     "mattpocock": {
@@ -78,10 +79,10 @@
         "repo": "mattpocock/skills"
       }
     },
-    "claude-hud": {
+    "omc": {
       "source": {
-        "source": "github",
-        "repo": "jarrodwatts/claude-hud"
+        "source": "git",
+        "url": "https://github.com/Yeachan-Heo/oh-my-claudecode.git"
       }
     }
   },

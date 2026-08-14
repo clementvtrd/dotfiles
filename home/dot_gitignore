@@ -7,4 +7,5 @@ compose.override.yaml
 !.specify/memory/
 .specify/memory/*
 !.specify/memory/constitution.md
+.omc
 
