@@ -1,6 +1,6 @@
-.PHONY: default init dependencies chezmoi install fonts-cascadia wallpaper
+.PHONY: default init dependencies chezmoi install fonts-cascadia wallpaper claude
 
-default: init dependencies install chezmoi fonts-cascadia wallpaper
+default: init claude dependencies install chezmoi fonts-cascadia wallpaper
 
 init:
 	@if [ ! -d /usr/local/bin ]; then \
@@ -28,6 +28,9 @@ fonts-cascadia:
 
 wallpaper:
 	@osascript -e 'tell application "Finder" to set desktop picture to POSIX file "$(PWD)/assets/wallpaper.heic"'
+
+claude:
+	@curl -fsSL https://claude.ai/install.sh | bash
 
 ~/.config/chezmoi/chezmoi.toml:
 	mkdir -p $(dir $@)
