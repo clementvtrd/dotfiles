@@ -7,6 +7,7 @@ cask "nikitabobko/tap/aerospace"
 cask "visual-studio-code", args: { appdir: "~/Applications" }
 cask "iterm2", args: { appdir: "~/Applications" }
 cask "claudoscope", args: { appdir: "~/Applications" }
+cask "bettercmdtab", args: { appdir: "~/Applications" }
 
 ## Core
 brew "git"

@@ -25,10 +25,9 @@
       "Bash(rtk ls *)",
       "Bash(rtk make *)",
       "Bash(rtk read *)",
-      "Read(/Users/clementvtrd/.claude/plugins/cache/*)"
+      "Read(/Users/clementvtrd/.claude/plugins/cache/**)"
     ],
     "deny": [
-      "Bash(cat *)",
       "Edit(.env.*)",
       "Edit(.env)",
       "Edit(*.env)",
@@ -45,7 +44,7 @@
       "Bash(rtk git push)",
       "Edit(Makefile)"
     ],
-    "defaultMode": "plan"
+    "defaultMode": "acceptEdits"
   },
   "hooks": {
     "PreToolUse": [
@@ -61,16 +60,11 @@
     ]
   },
   "disableSkillShellExecution": false,
-  "statusLine": {
-    "type": "command",
-    "command": "bash -c 'cols=${COLUMNS:-}; case \"$cols\" in \"\"|*[!0-9]*) cols=$(stty size </dev/tty 2>/dev/null | awk '\"'\"'{print }'\"'\"');; esac; case \"$cols\" in \"\"|*[!0-9]*) cols=120;; esac; export COLUMNS=$(( cols > 4 ? cols - 4 : 1 )); plugin_dir=$(ls -d \"${CLAUDE_CONFIG_DIR:-$HOME/.claude}\"/plugins/cache/*/claude-hud/*/ 2>/dev/null | awk -F/ '\"'\"'{ print $(NF-1) \"\\t\" $(0) }'\"'\"' | grep -E '\"'\"'^[0-9]+\\.[0-9]+\\.[0-9]+[[:space:]]'\"'\"' | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n | tail -1 | cut -f2-); exec \"/Users/clementvtrd/.nvm/versions/node/v24.14.0/bin/node\" \"${plugin_dir}dist/index.js\"'",
-    "refreshInterval": 5
-  },
   "enabledPlugins": {
     "mattpocock-skills@mattpocock": true,
+    "claude-hud@claude-hud": true,
     "php-lsp@claude-plugins-official": true,
-    "omc@oh-my-claudecode": true,
-    "oh-my-claudecode@omc": true
+    "ponytail@ponytail": true
   },
   "extraKnownMarketplaces": {
     "mattpocock": {
@@ -79,18 +73,31 @@
         "repo": "mattpocock/skills"
       }
     },
-    "omc": {
+    "claude-hud": {
       "source": {
-        "source": "git",
-        "url": "https://github.com/Yeachan-Heo/oh-my-claudecode.git"
+        "source": "github",
+        "repo": "jarrodwatts/claude-hud"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
       }
     }
   },
+  "effortLevel": "xhigh",
+  "model": "opus[1m]",
   "voice": {
     "enabled": true,
     "mode": "hold",
     "autoSubmit": true
   },
   "theme": "auto",
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "statusLine": {
+    "type": "command",
+    "command": "bash -c 'cols=${COLUMNS:-}; case \"$cols\" in \"\"|*[!0-9]*) cols=$(stty size 2>/dev/null </dev/tty | awk '\"'\"'{print $2}'\"'\"');; esac; case \"$cols\" in \"\"|*[!0-9]*) cols=120;; esac; export COLUMNS=$(( cols > 4 ? cols - 4 : 1 )); plugin_dir=$(ls -d \"${CLAUDE_CONFIG_DIR:-$HOME/.claude}\"/plugins/cache/*/claude-hud/*/ 2>/dev/null | awk -F/ '\"'\"'{ print $(NF-1) \"\\t\" $(0) }'\"'\"' | grep -E '\"'\"'^[0-9]+\\.[0-9]+\\.[0-9]+[[:space:]]'\"'\"' | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n | tail -1 | cut -f2-); exec \"/Users/clementvtrd/.nvm/versions/node/v24.14.0/bin/node\" \"${plugin_dir}dist/index.js\"'",
+    "refreshInterval": 5
+  }
 }
