@@ -1,6 +1,7 @@
 tap "nikitabobko/tap"
 tap "symfony-cli/tap"
 tap "cordwainersmith/claudoscope"
+tap "docker/tap"
 
 cask "android-studio", args: { appdir: "~/Applications" }
 cask "nikitabobko/tap/aerospace"
@@ -47,5 +48,6 @@ brew "powerlevel10k"
 brew "bat"
 # Replacement for Docker Desktop
 cask "orbstack"
+cask "docker/tap/sbx"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
