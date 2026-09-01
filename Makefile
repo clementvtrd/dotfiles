@@ -1,4 +1,4 @@
-.PHONY: default init dependencies chezmoi install fonts-cascadia wallpaper claude
+.PHONY: default init dependencies chezmoi install fonts-cascadia wallpaper claude sandbox
 
 default: init claude dependencies install chezmoi fonts-cascadia wallpaper
 
@@ -35,3 +35,6 @@ claude:
 ~/.config/chezmoi/chezmoi.toml:
 	mkdir -p $(dir $@)
 	echo 'sourceDir = "~/dotfiles"' > $@
+
+sandbox:
+	@sbx skills import -f

@@ -1,0 +1,19 @@
+claude-sandbox() {
+  local name="claude-${${PWD:t}//[^a-zA-Z0-9.-]/-}"
+
+  if sbx ls 2>/dev/null | awk 'NR>1 {print $1}' | grep -qx -- "$name"; then
+    sbx run --name "$name" "$@"
+    return
+  fi
+
+  local -a want=(github mermaid) have=() args=()
+  local s
+  for s in $want; do
+    sbx mcp inspect $s >/dev/null 2>&1 && have+=($s)
+  done
+  (( $#have )) && args=(--static-mcp ${(j:,:)have})
+
+  sbx run claude --name "$name" \
+    --kit "$HOME/.config/sbx/claude-kit" \
+    $args "$@"
+}
