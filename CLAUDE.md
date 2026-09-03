@@ -29,11 +29,9 @@ chezmoi decodes filenames — the prefixes are meaningful, not cosmetic:
 |---|---|---|
 | `home/dot_zshrc` | `~/.zshrc` | `dot_` → leading dot |
 | `home/dot_claude/private_settings.json` | `~/.claude/settings.json` | `private_` → mode 0600 |
-| `home/dot_vibe/skills/symlink_tdd` | `~/.vibe/skills/tdd` | `symlink_` → file *contents* are the link target |
+| `home/dot_claude/skills/grill-me/SKILL.md` | `~/.claude/skills/grill-me/SKILL.md` | directories pass through unchanged |
 
 Renaming a file changes where it lands. When adding a dotfile, prefer `chezmoi add ~/.foo` over hand-crafting the name.
-
-`home/dot_vibe/skills/symlink_*` all point at `../../.agents/skills/*` — i.e. `~/.agents/skills/`, which is deliberately gitignored (see `home/dot_gitignore`) and populated out of band.
 
 ## Editing rules
 
