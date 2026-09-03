@@ -25,6 +25,8 @@ brew "mkcert"
 brew "nvm"
 brew "php"
 brew "rtk"
+# Python tool installer, provides the `uv tool` used to install specify-cli
+brew "uv"
 brew "yq"
 brew "jq"
 brew "symfony-cli/tap/symfony-cli"
