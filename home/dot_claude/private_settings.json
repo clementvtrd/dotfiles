@@ -23,8 +23,7 @@
       "Bash(rtk ls *)",
       "Bash(rtk make *)",
       "Bash(rtk read *)",
-      "Bash(rtk wc *)",
-      "Read(/Users/clementvtrd/.claude/plugins/cache/**)"
+      "Bash(rtk wc *)"
     ],
     "deny": [
       "Edit(.env.*)",
@@ -59,17 +58,14 @@
       }
     ]
   },
-  "disableSkillShellExecution": false,
+  "disableSkillShellExecution": true,
   "enabledPlugins": {
     "php-lsp@claude-plugins-official": true
   },
   "effortLevel": "xhigh",
   "voice": {
-    "enabled": true,
-    "mode": "hold",
-    "autoSubmit": true
+    "enabled": false
   },
   "theme": "auto",
-  "voiceEnabled": true,
   "skipWorkflowUsageWarning": true
 }
