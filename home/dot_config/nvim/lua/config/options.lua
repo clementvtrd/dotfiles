@@ -3,3 +3,6 @@
 -- Add any additional options here
 vim.opt.termguicolors = true
 vim.opt.autochdir = false
+
+-- lang.php extra defaults to phpactor
+vim.g.lazyvim_php_lsp = "intelephense"

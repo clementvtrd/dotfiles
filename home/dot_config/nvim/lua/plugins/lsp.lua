@@ -3,33 +3,40 @@ return {
     "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
-        -- TypeScript / JS
-        "typescript-language-server",
-        "eslint-lsp",
-        "prettierd",
-        -- Go
-        "gopls",
+        -- Language servers listed in `servers` below (and the ones coming from
+        -- the LazyVim lang extras) are installed by mason-lspconfig, so only
+        -- the extra CLI tools need to be listed here.
         "gofumpt",
-        -- PHP
-        "intelephense",
-        -- HTML / CSS / Tailwind
-        "html-lsp",
-        "css-lsp",
-        "tailwindcss-language-server",
-        "emmet-ls",
+        "prettierd",
       },
     },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    -- html/typescript/tsx come from LazyVim, php from the lang.php extra
+    opts = { ensure_installed = { "css", "scss" } },
   },
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        tsserver = {},
+        -- Go
         gopls = {},
-        intelephense = {},
-        tailwindcss = {},
+        -- HTML / CSS: no LazyVim extra ships these, configure them here.
+        -- TypeScript (vtsls), PHP (intelephense), Tailwind and ESLint come
+        -- from the extras in lazyvim.json.
+        html = {},
+        cssls = {},
         emmet_ls = {
-          filetypes = { "html", "css", "php", "javascriptreact", "typescriptreact" },
+          filetypes = {
+            "css",
+            "html",
+            "javascriptreact",
+            "less",
+            "php",
+            "scss",
+            "typescriptreact",
+          },
         },
       },
     },
