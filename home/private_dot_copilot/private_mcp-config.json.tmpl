@@ -1,0 +1,45 @@
+{{- $ids := fromToml (include "../private/pass/ids.toml") -}}
+{{- $githubPat := printf "pass://%s/%s/Password" $ids.vault $ids.github_pat -}}
+{{- $context7 := printf "pass://%s/%s/Password" $ids.vault $ids.context7 -}}
+{
+  "mcpServers": {
+    "github": {
+      "tools": [
+        "*"
+      ],
+      "type": "local",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": {{ protonPass $githubPat | quote }}
+      }
+    },
+    "context7": {
+      "tools": [
+        "*"
+      ],
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp/oauth",
+      "headers": {
+        "Authorization": {{ printf "Bearer %s" (protonPass $context7) | quote }}
+      }
+    },
+    "playwright": {
+      "tools": [
+        "*"
+      ],
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ]
+    }
+  }
+}
