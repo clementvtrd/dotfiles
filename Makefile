@@ -1,4 +1,4 @@
-.PHONY: default init dependencies chezmoi install fonts-cascadia wallpaper claude sandbox
+.PHONY: default init dependencies submodules chezmoi install fonts-cascadia wallpaper claude sandbox
 
 default: init claude dependencies install chezmoi fonts-cascadia wallpaper
 
@@ -7,7 +7,16 @@ init:
 		sudo mkdir -p /usr/local/bin; \
 	fi
 
-chezmoi: ~/.config/chezmoi/chezmoi.toml
+# home/private_dot_copilot templates include ../private/pass/ids.toml, so the
+# submodule must be checked out at its pinned commit before chezmoi renders.
+submodules:
+	@git submodule sync --quiet --recursive
+	@git submodule update --init --recursive || { \
+		echo "error: cannot fetch the private submodule - check SSH access to github.com"; \
+		exit 1; \
+	}
+
+chezmoi: ~/.config/chezmoi/chezmoi.toml submodules
 	chezmoi apply
 
 dependencies:
