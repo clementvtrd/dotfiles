@@ -1,8 +1,3 @@
----
-name: internal-audit
-description: Run the KnpLabs-style internal project audit against the current repository - open a GitHub issue with the audit checklist, then verify every item hands-on (actually installing, testing, linting, running the tools) rather than just eyeballing config files. Use when the user asks to audit the project, run an internal/quality/health audit, or check the repo against the standard KnpLabs checklist.
----
-
 Audit the git repository in the current working directory against the standard checklist below. The point of this skill is **verification, not inspection**: for anything that happens on this machine, actually run it and see what happens instead of inferring from file presence. The only items you may answer from documentation alone are ones about environments other than the local machine (e.g. deploying to prod/preprod/staging).
 
 ## Prerequisites
@@ -13,7 +8,7 @@ Audit the git repository in the current working directory against the standard c
 ## Step 1 - Create the audit issue
 
 1. Fill in the template in the **Checklist template** section below verbatim - do not pre-check anything yet, this is the blank issue body.
-2. Ask the user for confirmation before creating anything, using `AskUserQuestion`: "Create a GitHub issue titled 'Internal audit' with the checklist below?" Options: create it now / don't create it, just show me the markdown.
+2. Ask the user for confirmation before creating anything, using {{ if eq .tool "claude" }}`AskUserQuestion`{{ else }}`ask_user`{{ end }}: "Create a GitHub issue titled 'Internal audit' with the checklist below?" Options: create it now / don't create it, just show me the markdown.
    - **If confirmed**: run `gh issue create --title "Internal audit" --body-file <tmp-file>` in the target repo. Keep the issue number - you'll edit it in step 3.
    - **If refused**: print the full checklist markdown in your response, in a fenced code block, so the user can paste it into an issue themselves. Do not create anything. Skip step 3 (there's no issue to update) but still perform steps 2 and 4.
 

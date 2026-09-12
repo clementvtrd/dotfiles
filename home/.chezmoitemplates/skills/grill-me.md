@@ -1,13 +1,16 @@
----
-name: grill-me
-description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.
----
-
-Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it. Create an artifact in Markdown that represent the decision tree using Mermaid graph.
+Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it. {{ if eq .tool "claude" -}}
+Create an artifact in Markdown that represent the decision tree using Mermaid graph.
+{{- else -}}
+Write the decision tree to a Markdown file as a Mermaid graph, and keep it updated as the tree grows.
+{{- end }}
 
 Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet. Ask the whole frontier in one round: number each question and give your recommended answer. Then wait for the user's answers before the next round.
 
+{{ if eq .tool "claude" -}}
 Format a round using AskUserQuestions tool.
+{{- else -}}
+Format a round using the `ask_user` tool. It asks one question at a time, so walk the round question by question, offering your recommended answer among the choices; a round is done when every question in it has been answered.
+{{- end }}
 
 Each round the user answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a _later_ round, not this one.
 
