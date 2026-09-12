@@ -18,7 +18,7 @@
         "ghcr.io/github/github-mcp-server"
       ],
       "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": {{ protonPass $githubPat | quote }}
+        "GITHUB_PERSONAL_ACCESS_TOKEN": {{ (protonPass $githubPat) | trim | quote }}
       }
     },
     "context7": {
@@ -26,9 +26,9 @@
         "*"
       ],
       "type": "http",
-      "url": "https://mcp.context7.com/mcp/oauth",
+      "url": "https://mcp.context7.com/mcp",
       "headers": {
-        "Authorization": {{ printf "Bearer %s" (protonPass $context7) | quote }}
+        "Authorization": {{ printf "Bearer %s" (protonPass $context7) | trim | quote }}
       }
     },
     "playwright": {
