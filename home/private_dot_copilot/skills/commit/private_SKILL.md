@@ -27,27 +27,40 @@ Rules:
 - no trailing period
 - lowercase start unless proper noun/acronym requires otherwise
 
-4) Breaking changes:
+4) Line length:
+
+- The subject line (type + optional scope + optional "!" + ": " + description)
+  MUST NOT exceed 50 characters total.
+- Body and footer lines MUST be hard-wrapped at 72 characters.
+- If the subject exceeds 50, shorten the description rather than dropping the
+  type or scope. Move any detail that does not fit into the body.
+- Never truncate mid-word or end the subject with "...".
+- Do not wrap a footer token away from its value; keep each footer on one line
+  even if it slightly exceeds 72 characters (e.g. a long URL).
+
+5) Breaking changes:
 
 - Either append "!" after type/scope (e.g., feat(api)!: change auth flow)
 - And/or include a footer line:
      BREAKING CHANGE: <explanation>
 - If a breaking change is indicated by user input, always include explicit BREAKING CHANGE footer.
 
-5) Body (optional):
+6) Body (optional):
 
+- Separated from the subject by one blank line
 - Explain what and why (not implementation minutiae)
 - Use complete sentences where useful
 
-6) Footers (optional):
+7) Footers (optional):
 
+- Separated from the body by one blank line
 - One per line, token format:
-     <token>: <value>
+<token>: <value>
      or
-     <token> #<issue-number>
+<token> #<issue-number>
 - Examples: Refs: #123, Closes: #45, Reviewed-by: Jane Doe
 
-7) Revert commits:
+8) Revert commits:
 
 - Use type "revert"
 - Description should start with: "revert: "
@@ -57,6 +70,9 @@ Behavior:
 
 - Ask 1 brief clarification only if critical info is missing (e.g., unknown type).
 - Otherwise infer the best type from change intent.
+- Before returning, count the characters of the subject line. If it is over 50,
+  rewrite it and move the removed detail to the body. Re-wrap any body line
+  longer than 72 characters.
 - Return ONLY the commit message (no code fences, no commentary).
 - If user asks for multiple alternatives, return 3 compliant options.
 
@@ -71,5 +87,4 @@ Type-selection guidance:
 - test: adding/updating tests
 - build: build system/dependencies
 - ci: CI config/pipeline changes
-- chore: maintenance not affecting src/tests
-- revert: revert previous commit
+- chore: maintenance not
