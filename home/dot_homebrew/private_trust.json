@@ -1,14 +1,11 @@
 {
   "trustedcasks": [
     "docker/tap/sbx",
-    "nikitabobko/tap/aerospace",
-    "cordwainersmith/claudoscope/claudoscope"
+    "nikitabobko/tap/aerospace"
   ],
   "trustedtaps": [
-    "anomalyco/tap",
     "docker/tap",
     "nikitabobko/tap",
-    "symfony-cli/tap",
-    "cordwainersmith/claudoscope"
+    "symfony-cli/tap"
   ]
 }
