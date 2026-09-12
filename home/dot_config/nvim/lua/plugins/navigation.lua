@@ -53,6 +53,15 @@ return {
           hide_gitignored = false,
         },
       },
+      window = {
+        mappings = {
+          -- Overrides the default "scroll_preview" so Cmd+B (sent as Ctrl+B)
+          -- also closes the tree when focus is already inside it
+          ["<C-b>"] = function()
+            require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
+          end,
+        },
+      },
     },
   },
 }

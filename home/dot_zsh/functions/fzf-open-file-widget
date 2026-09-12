@@ -1,0 +1,11 @@
+fzf-open-file-widget() {
+  local file
+  file=$(fd --type f --hidden --exclude .git | fzf --preview 'bat --style=numbers --color=always --line-range :200 {}')
+  if [[ -n "$file" ]]; then
+    BUFFER="${EDITOR:-nvim} ${(q)file}"
+    zle accept-line
+  fi
+  zle reset-prompt
+}
+zle -N fzf-open-file-widget
+bindkey '^[p' fzf-open-file-widget
