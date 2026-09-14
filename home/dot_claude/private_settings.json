@@ -3,7 +3,6 @@
   "permissions": {
     "allow": [
       "Bash(gh label *)",
-      "Bash(make *)",
       "Bash(rtk find *)",
       "Bash(rtk gh issue view *)",
       "Bash(rtk gh pr view *)",
@@ -40,7 +39,16 @@
     "ask": [
       "Bash(rtk git commit *)",
       "Bash(rtk git push)",
-      "Edit(Makefile)"
+      "Edit(rtk Makefile)",
+      "Bash(rtk make *)",
+      "Edit(rtk Taskfile.yml)",
+      "Bash(rtk task *)",
+      "Bash(git commit *)",
+      "Bash(git push)",
+      "Edit(Makefile)",
+      "Bash(make *)",
+      "Edit(Taskfile.yml)",
+      "Bash(task *)"
     ],
     "defaultMode": "auto"
   },
