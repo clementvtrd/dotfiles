@@ -12,15 +12,15 @@ sandbox:
 permissions:
   network:
     allow:
-      - "github.com"                            # plugin marketplaces + rtk release
+      - "github.com"
       - "codeload.github.com"
       - "objects.githubusercontent.com"
       - "raw.githubusercontent.com"
       - "registry.npmjs.org"
-      - "ghcr.io"                               # github MCP server image
+      - "ghcr.io"
       - "pkg-containers.githubusercontent.com"
-      - "astral.sh"                              # uv installer
-      - "pypi.org"                               # specify-cli (spec-kit)
+      - "astral.sh"
+      - "pypi.org"
       - "files.pythonhosted.org"
       - "pecl.php.net"
 

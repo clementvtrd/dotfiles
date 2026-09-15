@@ -13,5 +13,5 @@ claude() {
   done
   (( $#have )) && args=(--static-mcp ${(j:,:)have})
 
-  sbx run "$HOME/.config/sbx/claude-kit" clementvtrd-claude --name "$name" $args "$@"
+  sbx run "$HOME/.config/sbx/claude-kit" --name "$name" $args "$@"
 }
