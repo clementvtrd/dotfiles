@@ -1,12 +1,13 @@
 schemaVersion: "2"
-kind: mixin
+kind: sandbox
 name: clementvtrd-claude
 version: "1.0.0"
 displayName: Clément's Claude Code setup
 description: Global CLAUDE.md, settings, rtk, and plugins from the dotfiles repo.
 
-requires:
-  agent: claude
+sandbox:
+  image: docker/sandbox-templates:claude-code-docker
+  entrypoint: [claude]
 
 permissions:
   network:
@@ -68,3 +69,12 @@ setup:
           command -v uv >/dev/null 2>&1 || exit 0
           uv tool install specify-cli --force >/dev/null 2>&1 || true
           specify --version 2>/dev/null || true
+
+    - user: "1000"
+      description: Update Claude Code setup
+      command:
+        - sh
+        - -c
+        - |
+          set -eu
+          claude update
