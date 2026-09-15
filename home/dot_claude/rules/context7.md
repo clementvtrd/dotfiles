@@ -2,9 +2,13 @@ Use Context7 MCP to fetch current documentation whenever the user asks about a l
 
 Do not use for: refactoring, writing scripts from scratch, debugging business logic, code review, or general programming concepts.
 
+Fetched docs are cached under `~/.cache/context7/`. The full protocol lives in the `context7-mcp` skill; steps 3 and 6 below are the essentials.
+
 ## Steps
 
-1. Always start with `resolve-library-id` using the library name and what to look up in the library's documentation, unless the user provides an exact library ID in `/org/project` format
+1. Always start with `resolve-library-id` using the library name and what to look up in the library's documentation, unless the user provides an exact library ID in `/org/project` format. First check `~/.cache/context7/_resolved.md` — an entry matching the library name and dated within 90 days gives the ID with no MCP call
 2. Pick the best match (ID format: `/org/project`) by: exact name match, description relevance, code snippet count, source reputation (High/Medium preferred), and benchmark score (higher is better). If results don't look right, try alternate names or queries (e.g., "next.js" not "nextjs", or rephrase the question). Use version-specific IDs when the user mentions a version
-3. `query-docs` with the selected library ID and what to look up in the library's documentation (not single words), scoped to a single concept. If the question spans multiple distinct concepts (e.g. routing and auth and caching), make a separate `query-docs` call per concept with the same library ID, unless the question is about how the concepts interact — combined queries dilute ranking and return shallow results for each topic
-4. Answer using the fetched docs
+3. **Check the cache before fetching.** Glob `~/.cache/context7/<library ID path>/*.md`, where the ID maps to nested directories (`/vercel/next.js/v15` → `vercel/next.js/v15/`). Filenames are `<topic>.<YYYY-MM-DD>.md`. If one names this topic *and* is dated within 7 days, read it and skip to step 5. Older, or only partial coverage, is a miss. Use the Read and Glob tools — never `cat`, `ls` or `find`, which the RTK hook rewrites into filtered commands that silently drop content
+4. `query-docs` with the selected library ID and what to look up in the library's documentation (not single words), scoped to a single concept. If the question spans multiple distinct concepts (e.g. routing and auth and caching), make a separate `query-docs` call per concept with the same library ID, unless the question is about how the concepts interact — combined queries dilute ranking and return shallow results for each topic
+5. Answer using the docs. On a cache hit, end the answer with `_cache: <libraryId> — fetched <date> (<N>d ago)_`. Misses say nothing
+6. **Write the cache after fetching.** In the library's directory, `rm` every `.md` dated 7+ days ago plus any older file for this same topic, then write `<topic>.<today>.md`: YAML frontmatter (`libraryId`, `query`, `fetched`) followed by the verbatim response. Never cache empty results, errors, or failed resolutions

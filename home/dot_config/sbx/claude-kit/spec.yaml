@@ -21,6 +21,7 @@ permissions:
       - "astral.sh"                              # uv installer
       - "pypi.org"                               # specify-cli (spec-kit)
       - "files.pythonhosted.org"
+      - "pecl.php.net"
 
 setup:
   install:
@@ -37,11 +38,6 @@ setup:
         rm -rf "$tmp"
 
   startup:
-    # The built-in claude kit writes its own ~/.claude/settings.json from an
-    # install command, which runs *after* files/ is copied — so shipping the
-    # settings straight to ~/.claude would be clobbered. Startup runs after
-    # install, so merge here instead: the kit's sandbox defaults
-    # (bypassPermissions et al.) are kept and our config wins on conflict.
     - user: "1000"
       description: Merge dotfiles settings.json over the sandbox defaults
       command:
@@ -57,53 +53,6 @@ setup:
           jq -s '.[0] * .[1]' "$base" "$mine" > "$tmp"
           mv "$tmp" "$base"
 
-    # Claude Code does not act on extraKnownMarketplaces / enabledPlugins on its
-    # own — marketplaces must be cloned and plugins installed explicitly. Both
-    # lists are read back out of the merged settings.json rather than hardcoded,
-    # so enabling a plugin on the host is all it takes here. Every step is
-    # guarded, so this is a no-op on each start after the first.
-    - user: "1000"
-      description: Install marketplaces and plugins declared in settings.json
-      command:
-        - sh
-        - -c
-        - |
-          set -u
-          S=/home/agent/.claude/settings.json
-          P=/home/agent/.claude/plugins
-          [ -f "$S" ] || exit 0
-          # startup commands run via `su -s /bin/sh`, which drops ~/.local/bin
-          # from PATH — without this, claude is not found and this silently no-ops.
-          export PATH="/home/agent/.local/bin:$PATH"
-          command -v claude >/dev/null 2>&1 || exit 0
-
-          # Add only the marketplaces some enabled plugin actually references.
-          # claude-plugins-official is never listed in extraKnownMarketplaces
-          # because Claude Code knows it natively, so resolve it by hand.
-          for mkt in $(jq -r '.enabledPlugins // {} | to_entries[]
-                              | select(.value) | .key | split("@")[1]' "$S" | sort -u); do
-            [ -n "$mkt" ] || continue
-            jq -e --arg m "$mkt" 'has($m)' "$P/known_marketplaces.json" >/dev/null 2>&1 && continue
-            if [ "$mkt" = "claude-plugins-official" ]; then
-              repo=anthropics/claude-plugins-official
-            else
-              repo=$(jq -r --arg m "$mkt" '.extraKnownMarketplaces[$m].source.repo // empty' "$S")
-            fi
-            [ -n "$repo" ] || continue
-            claude plugin marketplace add "$repo" || true
-          done
-
-          for plugin in $(jq -r '.enabledPlugins // {} | to_entries[]
-                                 | select(.value) | .key' "$S"); do
-            [ -n "$plugin" ] || continue
-            jq -e --arg p "$plugin" '.plugins | has($p)' \
-              "$P/installed_plugins.json" >/dev/null 2>&1 && continue
-            claude plugin install "$plugin" || true
-          done
-
-    # spec-kit's specify CLI, refreshed to the latest published version on every
-    # start. The wheel force-includes the bundled `bug` extension, so
-    # `specify extension add bug` works offline once this is installed.
     - user: "1000"
       description: Install/upgrade spec-kit specify CLI (latest, with bundled extensions)
       command:

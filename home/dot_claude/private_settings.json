@@ -3,6 +3,7 @@
   "permissions": {
     "allow": [
       "Bash(gh label *)",
+      "Bash(rm ~/.cache/context7/**)",
       "Bash(rtk find *)",
       "Bash(rtk gh issue view *)",
       "Bash(rtk gh pr view *)",
@@ -21,8 +22,11 @@
       "Bash(rtk grep *)",
       "Bash(rtk ls *)",
       "Bash(rtk make *)",
+      "Bash(rtk proxy cat ~/.cache/context7/*)",
+      "Bash(rtk proxy ls ~/.cache/context7*)",
       "Bash(rtk read *)",
-      "Bash(rtk wc *)"
+      "Bash(rtk wc *)",
+      "Read(//Users/clementvtrd/.cache/context7/**)"
     ],
     "deny": [
       "Edit(.env.*)",
