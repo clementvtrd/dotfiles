@@ -24,6 +24,19 @@ permissions:
       - "files.pythonhosted.org"
       - "pecl.php.net"
 
+credentials:
+  - service: github
+    apiKey:
+      name: GITHUB_TOKEN
+      proxyManaged: true
+      inject:
+        - domain: api.github.com
+          header: Authorization
+          format: "Bearer %s"
+        - domain: github.com
+          header: Authorization
+          format: "Bearer %s"
+
 setup:
   install:
     - user: "0"
@@ -76,5 +89,5 @@ setup:
         - sh
         - -c
         - |
-          set -eu
+          set -u
           claude update
