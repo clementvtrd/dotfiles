@@ -44,6 +44,7 @@ Agent skills are not chezmoi-managed. `skills/` at the repo root is the canonica
 - The CLI is pinned to `skills@1.7.0`. It discards rather than migrates lock files written by an older version constant, so moving the pin makes the new CLI throw away the lock file 1.7.0 wrote. Do not bump it casually.
 - The CLI copies each skill to `~/.agents/skills/<name>/`, then symlinks `~/.claude/skills/<name>`, `~/.copilot/skills/<name>` and `~/.codex/skills/<name>` at that copy. The symlinks point at the copy, not at this repo — editing `skills/` changes nothing live, you have to re-run `make skills`.
 - A skill's directory name must equal its frontmatter `name`, because the CLI installs under the frontmatter name.
+- `home/dot_claude/CLAUDE.md` imports `@skills/terse/SKILL.md`, which resolves through the `~/.claude/skills/terse` symlink. That is the only place the chezmoi side depends on the skills side: the `terse` skill is meant to be on by default, and an import is what puts a skill in context without an invocation. Applying dotfiles on a machine where `make skills` has not run leaves that import dangling.
 - Write skills agent-neutral. The CLI has no templating; one identical file ships to all three agents.
 
 ## Editing rules

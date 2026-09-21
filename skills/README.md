@@ -11,10 +11,8 @@ One directory per skill, each containing a `SKILL.md`:
 ```
 skills/
   commit/SKILL.md
-  context7-mcp/SKILL.md
-  grill-me/SKILL.md
-  i-have-adhd/SKILL.md
   internal-audit/SKILL.md
+  terse/SKILL.md
 ```
 
 `SKILL.md` starts with YAML frontmatter. `name` and `description` are required; anything else (`user-invocable`, `disable-model-invocation`, …) is passed through to the agent untouched.
@@ -71,6 +69,12 @@ The CLI copies each skill into a canonical `~/.agents/skills/<name>/`, then syml
 Only the Copilot path is hardcoded. The CLI derives the Claude Code path from `CLAUDE_CONFIG_DIR` and the Codex path from `CODEX_HOME` when those are set, so the table shows the defaults.
 
 One copy on disk, three agents reading it.
+
+`~/.claude/CLAUDE.md` imports one of them: its `@skills/terse/SKILL.md` line resolves
+through `~/.claude/skills/terse` to the canonical copy, which is how a skill that is
+supposed to be on by default gets into context without being invoked. The global
+CLAUDE.md therefore depends on `make skills` having run — before it does, the import
+points at nothing.
 
 ## Adding a skill
 

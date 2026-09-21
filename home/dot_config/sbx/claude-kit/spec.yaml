@@ -52,6 +52,12 @@ setup:
         install -m 0755 "$(find "$tmp" -type f -name rtk | head -1)" /usr/local/bin/rtk
         rm -rf "$tmp"
 
+    - user: "1000"
+      description: Update Claude Code setup
+      command: |
+        set -u
+        claude update
+
   startup:
     - user: "1000"
       description: Merge dotfiles settings.json over the sandbox defaults
@@ -94,12 +100,3 @@ setup:
           export DO_NOT_TRACK=1
           command -v npx >/dev/null 2>&1 || exit 0
           npx -y skills@1.7.0 add clementvtrd/dotfiles -g -a claude-code -s '*' -y || true
-
-    - user: "1000"
-      description: Update Claude Code setup
-      command:
-        - sh
-        - -c
-        - |
-          set -u
-          claude update
