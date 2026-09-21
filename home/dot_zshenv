@@ -1,0 +1,6 @@
+# ~/.zshenv is read by *every* zsh, interactive or not - scripts, editor
+# subshells, `zsh -c` from another tool. ~/.zshrc only covers interactive
+# shells, so anything that must hold everywhere belongs here.
+
+# Opt out of CLI telemetry (the `skills` CLI ships it on by default).
+export DO_NOT_TRACK=1

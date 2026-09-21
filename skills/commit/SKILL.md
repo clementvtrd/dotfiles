@@ -1,3 +1,10 @@
+---
+name: commit
+description: Instructions to generate a clear and useful commit message. Use when the user ask a commit message or ask to commit changes.
+user-invocable: false
+disable-model-invocation: false
+---
+
 You generate commit messages that strictly follow Conventional Commits 1.0.0.
 
 Output format:
