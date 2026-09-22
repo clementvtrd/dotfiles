@@ -1,11 +1,9 @@
 {
   "trustedcasks": [
-    "docker/tap/sbx",
-    "nikitabobko/tap/aerospace"
+    "docker/tap/sbx"
   ],
   "trustedtaps": [
     "docker/tap",
-    "nikitabobko/tap",
     "symfony-cli/tap"
   ]
 }
