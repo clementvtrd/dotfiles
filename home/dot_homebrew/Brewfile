@@ -49,3 +49,5 @@ cask "orbstack"
 cask "docker/tap/sbx"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
+# Cross-shell prompt for astronauts
+brew "starship"

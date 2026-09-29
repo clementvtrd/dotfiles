@@ -1,0 +1,6 @@
+{{- $signingkey := promptStringOnce . "signingkey" "What is your GPG signing key" -}}
+
+sourceDir = "~/dotfiles"
+
+[data]
+  signingkey = {{ $signingkey | quote }}

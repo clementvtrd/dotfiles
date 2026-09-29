@@ -82,4 +82,4 @@ skills-link:
 
 ~/.config/chezmoi/chezmoi.toml:
 	mkdir -p $(dir $@)
-	echo 'sourceDir = "~/dotfiles"' > $@
+	chezmoi init --source "$(HOME)/dotfiles"

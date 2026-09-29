@@ -9,6 +9,7 @@
 [user]
 	name = Clément Vétillard
 	email = 84911237+clementvtrd@users.noreply.github.com
+	signingkey = {{ .signingkey }}
 
 [push]
   autoSetupRemote = true
@@ -17,3 +18,7 @@
 
 [init]
   defaultBranch = main
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
