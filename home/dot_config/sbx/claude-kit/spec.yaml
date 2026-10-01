@@ -39,7 +39,28 @@ credentials:
           format: "Bearer %s"
 
 setup:
+  install:
+    - user: "0"
+      description: Update and install dependencies
+      command: |
+        apt update
+        apt upgrade -y
+        apt install libnss3-tools
+
+        git clone https://github.com/FiloSottile/mkcert /opt/mkcert
+
   startup:
+    - user: "0"
+      description: Update mkcert
+      command:
+        - sh
+        - -c
+        - |
+          cd /opt/mkcert
+          go build -ldflags "-X main.Version=$(git describe --tags)"
+          chmod +x mkcert
+          mv /opt/mkcert/mkcert /usr/local/bin/mkcert
+
     - user: "1000"
       description: Merge dotfiles settings.json over the sandbox defaults
       command:
