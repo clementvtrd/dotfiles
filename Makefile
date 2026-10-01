@@ -26,13 +26,6 @@ install:
 	@if command -v brew >/dev/null 2>&1; then \
 		brew bundle --global check || brew bundle --global install; \
 	fi
-	@if command -v rtk >/dev/null 2>&1; then \
-		rtk init -g; \
-	fi
-# GitHub Spec Kit: released specify-cli from PyPI, not git main
-	@if command -v uv >/dev/null 2>&1; then \
-		uv tool install --upgrade specify-cli; \
-	fi
 
 fonts-cascadia:
 	@bash ./bin/install-cascadia-macos.sh

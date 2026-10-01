@@ -3,7 +3,7 @@ kind: sandbox
 name: clementvtrd-claude
 version: "1.0.0"
 displayName: Clément's Claude Code setup
-description: Global CLAUDE.md, settings, rtk, and plugins from the dotfiles repo.
+description: Global CLAUDE.md, settings, and plugins
 
 sandbox:
   image: docker/sandbox-templates:claude-code-docker
@@ -39,25 +39,6 @@ credentials:
           format: "Bearer %s"
 
 setup:
-  install:
-    - user: "0"
-      description: Install rtk (the PreToolUse hook runs on every Bash call)
-      command: |
-        set -eu
-        command -v rtk >/dev/null 2>&1 && exit 0
-        tmp=$(mktemp -d)
-        curl -fsSL -o "$tmp/rtk.tgz" \
-          https://github.com/rtk-ai/rtk/releases/download/v0.46.0/rtk-aarch64-unknown-linux-gnu.tar.gz
-        tar -xzf "$tmp/rtk.tgz" -C "$tmp"
-        install -m 0755 "$(find "$tmp" -type f -name rtk | head -1)" /usr/local/bin/rtk
-        rm -rf "$tmp"
-
-    - user: "1000"
-      description: Update Claude Code setup
-      command: |
-        set -u
-        claude update
-
   startup:
     - user: "1000"
       description: Merge dotfiles settings.json over the sandbox defaults

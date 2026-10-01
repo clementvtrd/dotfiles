@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(find *)",
+      "Bash(gh issue view *)",
+      "Bash(gh label *)",
+      "Bash(gh pr view *)",
+      "Bash(git add *)",
+      "Bash(git diff *)",
+      "Bash(git diff)",
+      "Bash(git grep *)",
+      "Bash(git grep)",
+      "Bash(git log *)",
+      "Bash(git log)",
+      "Bash(git rev-parse *)",
+      "Bash(git show *)",
+      "Bash(git show)",
+      "Bash(git status *)",
+      "Bash(git status)",
+      "Bash(grep *)",
+      "Bash(ls *)",
+      "Bash(make *)",
+      "Bash(read *)",
+      "Bash(wc *)"
+    ],
+    "deny": [
+      "Edit(.env.*)",
+      "Edit(.env)",
+      "Edit(*.env)",
+      "Read(.env.*)",
+      "Read(.env)",
+      "Read(*.env)",
+      "Edit(.git)",
+      "Read(.git)",
+      "Edit(.git/**)",
+      "Read(.git/**)"
+    ],
+    "ask": [
+      "Bash(git commit *)",
+      "Bash(git push)",
+      "Bash(make *)",
+      "Bash(task *)",
+      "Edit(Makefile)",
+      "Edit(Taskfile.yml)"
+    ],
+    "defaultMode": "auto"
+  },
+  "model": "opus",
+  "disableSkillShellExecution": true,
+  "enabledPlugins": {
+    "php-lsp@claude-plugins-official": true
+  },
+  "effortLevel": "medium",
+  "skipWorkflowUsageWarning": true
+}
