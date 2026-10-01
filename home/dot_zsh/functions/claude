@@ -1,9 +1,20 @@
 claude() {
-  local name="claude-${${PWD:t}//[^a-zA-Z0-9.-]/-}"
+  local name="${${PWD:t}//[^a-zA-Z0-9.-]/-}"
+  local shell=0
+  [[ $1 == (-s|--shell) ]] && { shell=1; shift }
 
   if sbx ls 2>/dev/null | awk 'NR>1 {print $1}' | grep -qx -- "$name"; then
-    sbx run --name "$name" "$@"
+    if (( shell )); then
+      sbx exec -it "$name" "${@:-bash}"
+    else
+      sbx run --name "$name" "$@"
+    fi
     return
+  fi
+
+  if (( shell )); then
+    print -u2 "claude: no sandbox '$name' yet; run 'claude' first"
+    return 1
   fi
 
   local -a want=(github mermaid) have=() args=()

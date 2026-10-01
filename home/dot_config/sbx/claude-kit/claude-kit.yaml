@@ -1,0 +1,118 @@
+# syntax=docker/sandbox-kit:3
+schemaVersion: "3"
+kind: workload
+
+capabilities:
+  - type: com.docker.sandbox/sbx@1
+
+  - type: com.docker.sandbox/network-policy@1
+    config:
+      runtime:
+        allow:
+          - api.anthropic.com:443
+          - api.github.com:443
+          - astral.sh:443
+          - bridge.claudeusercontent.com:443
+          - cdn.playwright.dev:443
+          - claude.com:443
+          - codeload.github.com:443
+          - downloads.claude.ai:443
+          - files.pythonhosted.org:443
+          - ghcr.io:443
+          - github.com:443
+          - mcp-proxy.anthropic.com:443
+          - objects.githubusercontent.com:443
+          - pecl.php.net:443
+          - pkg-containers.githubusercontent.com:443
+          - platform.claude.com:443
+          - pypi.org:443
+          - raw.githubusercontent.com:443
+          - registry.npmjs.org:443
+
+  - type: com.docker.sandbox/credential@1
+    optional: false
+    config:
+      service: github
+      phase: runtime
+      apiKey:
+        name: GITHUB_TOKEN
+        proxyManaged: true
+        inject:
+          - domain: api.github.com
+            header: Authorization
+            format: "Bearer %s"
+          - domain: github.com
+            header: Authorization
+            format: "Bearer %s"
+
+  - type: com.docker.sandbox/credential@1
+    optional: true
+    config:
+      service: anthropic
+      phase: runtime
+      apiKey:
+        name: ANTHROPIC_API_KEY
+        inject:
+          - {domain: api.anthropic.com, header: x-api-key, format: "%s"}
+          - {domain: mcp-proxy.anthropic.com, header: x-api-key, format: "%s"}
+      oauth:
+        tokenEndpoint: {host: platform.claude.com, path: /v1/oauth/token}
+        sentinels:
+          accessToken: sk-ant-oat01-proxy-managed
+          refreshToken: sk-ant-ort01-proxy-managed
+        credentialFile:
+          path: ~/.claude/.credentials.json
+          structure:
+            claudeAiOauth:
+              accessToken: "{{.AccessToken}}"
+              refreshToken: "{{.RefreshToken}}"
+              expiresAt: "{{.ExpiresAt}}"
+              scopes: "{{.Scopes}}"
+            primaryApiKey: "{{.PrimaryApiKey}}"
+
+  - type: com.docker.sandbox/lifecycle@1
+    config:
+      startup:
+        - user: "1000"
+          description: Merge dotfiles settings.json over the sandbox defaults
+          command:
+            - sh
+            - -c
+            - |
+              set -eu
+              base=/home/agent/.claude/settings.json
+              mine=/home/agent/.config/sbx-claude/settings.json
+              [ -f "$mine" ] || exit 0
+              [ -f "$base" ] || echo '{}' > "$base"
+              tmp=$(mktemp)
+              jq -s '.[0] * .[1]' "$base" "$mine" > "$tmp"
+              mv "$tmp" "$base"
+
+        - user: "1000"
+          description: Install/upgrade spec-kit specify CLI (latest, with bundled extensions)
+          env: [HTTP_PROXY, HTTPS_PROXY]
+          command:
+            - sh
+            - -c
+            - |
+              set -u
+              export PATH="/home/agent/.local/bin:$PATH"
+              if ! command -v uv >/dev/null 2>&1; then
+                curl -fsSL https://astral.sh/uv/install.sh | sh >/dev/null 2>&1 || true
+                export PATH="/home/agent/.local/bin:$PATH"
+              fi
+              command -v uv >/dev/null 2>&1 || exit 0
+              uv tool install specify-cli --force >/dev/null 2>&1 || true
+              specify --version 2>/dev/null || true
+
+        - user: "1000"
+          description: Install personal skills from the public dotfiles repo (Claude Code only)
+          env: [HTTP_PROXY, HTTPS_PROXY]
+          command:
+            - sh
+            - -c
+            - |
+              set -u
+              export DO_NOT_TRACK=1
+              command -v npx >/dev/null 2>&1 || exit 0
+              npx -y skills@1.7.0 add clementvtrd/dotfiles -g -a claude-code -s '*' -y || true
