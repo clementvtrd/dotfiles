@@ -18,6 +18,7 @@ brew "gh"
 brew "go-task"
 brew "golang"
 brew "mkcert"
+brew "nss"
 brew "nvm"
 brew "php"
 # Python tool installer, provides the `uv tool` used to install specify-cli

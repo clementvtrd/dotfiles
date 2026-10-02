@@ -46,6 +46,8 @@
   },
   "model": "opus",
   "disableSkillShellExecution": true,
+  "awaySummaryEnabled": false,
+  "spinnerTipsEnabled": false,
   "enabledPlugins": {
     "php-lsp@claude-plugins-official": true
   },
