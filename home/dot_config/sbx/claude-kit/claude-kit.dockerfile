@@ -10,7 +10,8 @@ RUN apt-get update \
 RUN git clone https://github.com/FiloSottile/mkcert /opt/mkcert \
  && cd /opt/mkcert \
  && go build -ldflags "-X main.Version=$(git describe --tags)" -o /usr/local/bin/mkcert \
- && chmod +x /usr/local/bin/mkcert
+ && chmod +x /usr/local/bin/mkcert \
+ && chown -R 1000:1000 /go /home/agent/.cache
 
 RUN echo 'eval "$(starship init bash)"' >> /home/agent/.bashrc
 
