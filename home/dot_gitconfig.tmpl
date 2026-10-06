@@ -1,6 +1,7 @@
 [alias]
   amend = commit --amend --no-edit
   undo = reset --soft HEAD~1
+  ca = commit --all
 
 [core]
   excludesFile = ~/.gitignore
@@ -18,7 +19,9 @@
 
 [init]
   defaultBranch = main
+
 [commit]
 	gpgsign = true
+
 [tag]
 	gpgSign = true

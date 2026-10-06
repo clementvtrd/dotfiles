@@ -5,5 +5,8 @@
   "trustedtaps": [
     "docker/tap",
     "symfony-cli/tap"
+  ],
+  "trustedformulae": [
+    "symfony-cli/tap/symfony-cli"
   ]
 }

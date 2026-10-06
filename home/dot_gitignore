@@ -2,6 +2,5 @@
 compose.override.yaml
 .vscode
 .agents
-.claude
-.omc
+.claude/settings.local.json
 
