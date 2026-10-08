@@ -115,4 +115,4 @@ capabilities:
               set -u
               export DO_NOT_TRACK=1
               command -v npx >/dev/null 2>&1 || exit 0
-              npx -y skills@1.7.0 add clementvtrd/dotfiles -g -a claude-code -s '*' -y || true
+              npx -y skills@1.7.0 add knplabs/agents -g -a claude-code -s '*' -y || true
