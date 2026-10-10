@@ -120,6 +120,14 @@ Help fix the problem, understand what happened and prevent it from happening aga
 
 A mistake that is understood should become a source of learning.
 
+## GIT
+
+To move or rename a tracked file, use `git mv`. Never use plain `mv`, and never delete the file and write a new one with almost the same content.
+
+If the file also needs changes, run `git mv` first and edit it afterwards.
+
+Why: git only keeps a file's history (`git log --follow`, `git blame`) across a rename when it can match the old and new paths. Rewriting the content during the move breaks that match and makes the diff harder to review.
+
 ## PRIORITIES
 
 In case of conflict, prioritize:
