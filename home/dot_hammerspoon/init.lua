@@ -1,9 +1,11 @@
+local ratio = 0.95 -- 95 % de la largeur et de la hauteur
+
 local ignoredApps = {
 	["Système Settings"] = true,
 	["Calculator"] = true,
 }
 
-local function maximize(win)
+local function centerAndResize(win)
 	if not win or not win:isStandard() then
 		return
 	end
@@ -12,13 +14,15 @@ local function maximize(win)
 		return
 	end
 
-	win:maximize(0) -- zone utile (hors barre de menus et Dock), sans animation
+	local s = win:screen():frame() -- zone utile (hors barre de menus et Dock)
+	local w, h = s.w * ratio, s.h * ratio
+	win:setFrame({
+		x = s.x + (s.w - w) / 2,
+		y = s.y + (s.h - h) / 2,
+		w = w,
+		h = h,
+	}, 0) -- 0 = sans animation
 end
 
 windowWatcher = hs.window.filter.new()
-windowWatcher:subscribe(hs.window.filter.windowCreated, maximize)
-
--- init.lua est ré-exécuté à chaque rechargement : on applique la règle aux fenêtres existantes
-for _, win in ipairs(windowWatcher:getWindows()) do
-	maximize(win)
-end
+windowWatcher:subscribe(hs.window.filter.windowCreated, centerAndResize)
