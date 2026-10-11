@@ -3,4 +3,5 @@ compose.override.yaml
 .vscode
 .agents
 .claude/settings.local.json
+.vibe
 
