@@ -47,6 +47,6 @@ node:
 		echo "warning: nvm.sh not found - skipping node (brew install nvm)"; \
 	fi
 
-~/.config/chezmoi/chezmoi.toml:
+~/.config/chezmoi/chezmoi.toml: | submodules
 	mkdir -p $(dir $@)
 	chezmoi init --source "$(HOME)/dotfiles"

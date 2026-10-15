@@ -22,7 +22,7 @@ chezmoi target-path home/dot_zshrc   # source path -> real $HOME path
 
 ## Source layout / naming
 
-`.chezmoiroot` is `home`, so **`home/` is the chezmoi source root** and everything above it (`Makefile`, `bin/`, `assets/`) is repo scaffolding that never lands in `$HOME`. Never landing is not the same as never being read: `.chezmoiroot` is chezmoi's own, and `home/private_dot_copilot/private_mcp-config.json.tmpl` does `include "../private/pass/ids.toml"`, so the root-level `private/` submodule is read at apply time (hence `make chezmoi` checks it out first).
+`.chezmoiroot` is `home`, so **`home/` is the chezmoi source root** and everything above it (`Makefile`, `bin/`, `assets/`) is repo scaffolding that never lands in `$HOME`. Never landing is not the same as never being read: `.chezmoiroot` is chezmoi's own, and `home/.chezmoi.toml.tmpl` does `include "../private/pass/ids.toml"`, so the root-level `private/` submodule is read at init time (hence the `make` config target checks it out first). That config template resolves the Proton Pass secrets (GitHub PAT, Context7 key) once and caches them in `~/.config/chezmoi/chezmoi.toml` (0600) as `.github_pat` / `.context7`; to rotate one, delete its key there and re-run `chezmoi init`.
 
 chezmoi decodes filenames — the prefixes are meaningful, not cosmetic:
 

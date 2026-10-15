@@ -1,6 +1,18 @@
 {{- $signingkey := promptStringOnce . "signingkey" "What is your GPG signing key" -}}
+{{- /* Resolved once at `chezmoi init` and cached in chezmoi.toml, so `chezmoi apply` never hits Proton Pass. */ -}}
+{{- $ids := fromToml (include "../private/pass/ids.toml") -}}
+{{- $githubPat := get . "github_pat" -}}
+{{- if not $githubPat -}}
+{{-   $githubPat = protonPass (printf "pass://%s/%s/Password" $ids.vault $ids.github_pat) | trim -}}
+{{- end -}}
+{{- $context7 := get . "context7" -}}
+{{- if not $context7 -}}
+{{-   $context7 = protonPass (printf "pass://%s/%s/Password" $ids.vault $ids.context7) | trim -}}
+{{- end -}}
 
 sourceDir = "~/dotfiles"
 
 [data]
   signingkey = {{ $signingkey | quote }}
+  github_pat = {{ $githubPat | quote }}
+  context7 = {{ $context7 | quote }}
