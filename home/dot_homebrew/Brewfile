@@ -1,5 +1,4 @@
 tap "symfony-cli/tap"
-tap "docker/tap"
 
 cask "android-studio", args: { appdir: "~/Applications" }
 cask "visual-studio-code", args: { appdir: "~/Applications" }
@@ -46,7 +45,6 @@ brew "powerlevel10k"
 brew "bat"
 # Replacement for Docker Desktop
 cask "orbstack"
-cask "docker/tap/sbx"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
 # Cross-shell prompt for astronauts

@@ -1,6 +1,6 @@
-.PHONY: default init dependencies submodules chezmoi install fonts-cascadia wallpaper node sbx
+.PHONY: default init dependencies submodules chezmoi install fonts-cascadia wallpaper node
 
-default: init dependencies install chezmoi node fonts-cascadia wallpaper sbx
+default: init dependencies install chezmoi node fonts-cascadia wallpaper
 
 init:
 	@if [ ! -d /usr/local/bin ]; then \
@@ -46,14 +46,6 @@ node:
 	else \
 		echo "warning: nvm.sh not found - skipping node (brew install nvm)"; \
 	fi
-
-sbx: sbx.policy sbx.settings
-
-sbx.policy:
-	-sbx policy init balanced
-
-sbx.settings:
-	sbx settings set sandbox.disk.dockerVolume 64g
 
 ~/.config/chezmoi/chezmoi.toml:
 	mkdir -p $(dir $@)

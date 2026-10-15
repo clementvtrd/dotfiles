@@ -1,7 +1,8 @@
 local ratio = 0.95 -- 95 % de la largeur et de la hauteur
 
 local ignoredApps = {
-	["Système Settings"] = true,
+	["System Settings"] = true,
+	["Réglages Système"] = true,
 	["Calculator"] = true,
 }
 
@@ -22,6 +23,11 @@ local function centerAndResize(win)
 		w = w,
 		h = h,
 	}, 0) -- 0 = sans animation
+end
+
+-- Au (re)chargement de la config, recadre toutes les fenêtres déjà ouvertes
+for _, win in ipairs(hs.window.allWindows()) do
+	centerAndResize(win)
 end
 
 windowWatcher = hs.window.filter.new()

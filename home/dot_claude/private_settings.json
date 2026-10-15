@@ -41,8 +41,7 @@
       "Bash(git push)",
       "Edit(Makefile)",
       "Edit(Taskfile.yml)"
-    ],
-    "defaultMode": "auto"
+    ]
   },
   "model": "opus",
   "disableSkillShellExecution": true,

@@ -1,4 +1,3 @@
-@/usr/share/sandbox/kit/claude-kit/AGENTS.md
 # Instructions
 
 You are a support agent working for the user.

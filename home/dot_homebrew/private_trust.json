@@ -1,9 +1,6 @@
 {
-  "trustedcasks": [
-    "docker/tap/sbx"
-  ],
+  "trustedcasks": [],
   "trustedtaps": [
-    "docker/tap",
     "symfony-cli/tap"
   ],
   "trustedformulae": [
