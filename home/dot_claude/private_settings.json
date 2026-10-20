@@ -45,11 +45,26 @@
   },
   "model": "opus",
   "disableSkillShellExecution": true,
-  "awaySummaryEnabled": false,
-  "spinnerTipsEnabled": false,
   "enabledPlugins": {
     "php-lsp@claude-plugins-official": true
   },
+  "extraKnownMarketplaces": {
+    "daily.dev": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/dailydotdev/daily.git"
+      }
+    }
+  },
+  "outputStyle": "Concise",
+  "spinnerTipsEnabled": false,
   "effortLevel": "medium",
-  "skipWorkflowUsageWarning": true
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
+  "awaySummaryEnabled": false,
+  "skipWorkflowUsageWarning": true,
+  "theme": "auto"
 }
