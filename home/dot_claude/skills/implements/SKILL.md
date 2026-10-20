@@ -51,6 +51,7 @@ Otherwise, unless already on a fitting branch, create one from the up-to-date de
 1. Explore the code the change touches and follow the project's conventions (read its CLAUDE.md / README / contributing docs).
 2. Propose a short plan: the files and behaviours involved, the order of steps, how it will be verified. For anything non-trivial, or if there are several valid approaches, give the trade-offs and let the user pick.
 3. Implement in small steps, keeping the diff focused on the issue. No unrelated refactors; mention them at the end instead.
+   - Don't add comments the code already says through its names (classes, functions, variables…). Comment only the *why* (a constraint, a trade-off, a non-obvious choice), never the *what*.
 4. Run the project's tests, linters and type checks, and report the real outcome, including failures.
 
 ## 6. Wrap up
