@@ -1,6 +1,6 @@
 ---
 name: stacked-prs
-description: Cut a large local diff into a stack of small, independently valid GitHub pull requests, ordered so reviewers follow the story. Use when the user has a huge diff (or branch) to split, asks for stacked / chained / split PRs, or says a change is too big to review.
+description: Cut a large local diff into a stack of small, independently valid GitHub pull requests, ordered so reviewers follow the story, or continue an existing stack. Branches are always created with the gh stack CLI. Use when the user has a huge diff (or branch) to split, asks for stacked / chained / split PRs, wants to continue a stack, or says a change is too big to review.
 ---
 
 # Stacked pull requests
@@ -8,6 +8,28 @@ description: Cut a large local diff into a stack of small, independently valid G
 Turn one huge local diff into a stack of small PRs. Each PR is reviewable on its own, **passes CI on its own**, and the order tells reviewers what was done so far and why.
 
 You support the user, you don't decide for them: the goal, the split and anything that leaves the machine (push, PR creation) are confirmed with them first.
+
+## Running `gh stack` from here
+
+Most `gh stack` commands open an interactive UI (editor, picker, prompt) when an argument is missing. The Bash tool can't answer it, so the command hangs until it times out. Follow these rules for **every** call:
+
+- Always pass every argument explicitly, and use the non-interactive form:
+
+  | Command | Use | Never |
+  |---|---|---|
+  | `init` | `gh stack init <branch> [--base <base>]` | `gh stack init` without a branch |
+  | `add` | `gh stack add -m "<message>" <branch>` | `add` with `-A` / `-u` and no `-m` (opens the editor), or without a branch (auto-named) |
+  | `view` | `gh stack view --short` (or `--json`) | `gh stack view` (interactive view) |
+  | `checkout` | `gh stack checkout <pr-number \| pr-url \| branch>` | `gh stack checkout` alone (picker); a bare number is read as a *stack* number first, so prefer a PR URL or branch name |
+  | `submit` | `gh stack submit --auto` | `gh stack submit` (single-screen editor) |
+  | `rebase` | `gh stack rebase`, then `--continue` / `--abort` | |
+  | `sync` | `gh stack sync` | |
+  | `push` | `gh stack push` | |
+
+- Set a timeout on the Bash call (60 s is plenty; `submit` and `sync` can take longer, use 180 s) and redirect stdin so a prompt can't wait for input: `GIT_EDITOR=true gh stack <cmd> </dev/null`.
+- If a command times out or prints a prompt, **don't wait or retry the same call**. Stop, tell the user what it was asking, and either find the non-interactive flag in `gh stack <cmd> --help` or ask the user to run it themselves in their terminal.
+- `gh stack sync` aborts when the local and remote stacks have diverged and there is no TTY. Report it to the user instead of forcing anything.
+- A conflict in `gh stack rebase` leaves a rebase in progress: resolve the files, `git add` them, then `GIT_EDITOR=true gh stack rebase --continue </dev/null`. If it can't be resolved cleanly, `gh stack rebase --abort` and ask the user.
 
 ## 1. Back up the diff
 
@@ -77,13 +99,19 @@ Once the plan is approved:
 
 1. Make sure the backup is intact (`git diff --stat <stash-sha>` against the working tree is empty), then tell the user you are about to reset the working tree, which is safe because of the stash, and run `git reset --hard`.
 2. For each PR, in order:
-   - Create the branch from the previous one (the first one from the base): `git switch -c <prefix>/<n>-<slug> <previous-branch-or-base>`.
-   - Bring in its content from the target:
+   - **Branches are created with the `gh stack` CLI, never with `git switch -c` / `git branch` / `git checkout -b`**, so the stack is tracked from the start.
+   - Bring in its content from the target, **staged**:
      - whole files: `git restore --source=<stash-sha> --worktree --staged -- <paths>` (works for files deleted in the target too, with `git rm`),
      - partial files: write the wanted hunks to a patch file in the scratchpad and `git apply --index` it. Interactive tools (`git add -p`, `git checkout -p`) are not usable from here.
-   - **Run the CI checks discovered in step 3.** Fix what fails in this PR, not in a later one. If a PR can't be made valid, go back to the user with a proposal (merge with a neighbor, reorder).
-   - Commit with a clear message. Follow the repository's commit conventions.
-3. If a later step reveals something that belongs in an earlier PR, fix it there and carry it up the stack (`git rebase --onto` / `git rebase --update-refs`), then re-run the checks of every PR above it.
+   - **Run the CI checks discovered in step 3.** Fix what fails in this PR, not in a later one (and `git add` the fixes). If a PR can't be made valid, go back to the user with a proposal (merge with a neighbor, reorder).
+   - Create the branch and commit, always with `-m` (never open an editor), following the repository's commit conventions:
+     - first PR: `gh stack init <prefix>/<n>-<slug>` (add `--base <base>` if the base isn't the default branch) *before* bringing the content in, then `git commit -m "<message>"`,
+     - next PRs: `gh stack add -m "<message>" <prefix>/<n>-<slug>`. It creates the branch on top of the current one and commits what is staged, so the content must be staged first.
+3. If a later step reveals something that belongs in an earlier PR, fix it there and carry it up the stack with `gh stack rebase`, then re-run the checks of every PR above it.
+
+### Continuing an existing stack
+
+If the current branch already belongs to a stack (`gh stack view --short`), or the user wants to extend one (`gh stack checkout <pr-url-or-branch>`), don't start over: skip the stash target logic of step 1 unless a large diff is being split, make sure you are on the top of the stack, and add each new PR with `gh stack add <branch>`. Steps 3 to 7 apply as is.
 
 ## 6. Verify the stack
 
@@ -99,14 +127,13 @@ An empty diff proves nothing was lost or added by the split. If it isn't empty, 
 
 Pushing and opening PRs is visible to others: **ask the user before doing it**, and ask whether they want drafts.
 
-- If the user works with a stacking tool (Graphite `gt`, `gh stack`…), use it for the branch / PR plumbing. Otherwise plain `git` + `gh` is enough.
-- Push each branch, then open the PRs in order, each one **based on the previous branch** (the first one on the base branch):
+- The branches are tracked by `gh stack`, so use it to push and open the PRs: each PR is based on the previous branch (the first one on the base branch) and the stack is linked on GitHub.
 
   ```sh
-  git push -u origin <branch>
-  gh pr create --base <previous-branch-or-base> --head <branch> --title "<title>" --body-file <file>
+  gh stack submit --auto   # new PRs are drafts by default; add --open for ready-for-review
   ```
 
+  Never run `gh stack submit` without `--auto`: it opens an editor that would hang. `--auto` skips it, and generates placeholder titles and descriptions, so replace them right after with `gh pr edit <branch> --title "<title>" --body-file <file>`.
 - Write each description with the **`pr-description`** skill, one per PR. Keep its structure as is. Let the *Why?* say what the previous PRs of the stack brought and what this one adds, so a reviewer landing on it understands where they are in the story.
 - Add the final stack order (titles and links) in your reply to the user, so they can review top to bottom.
 
