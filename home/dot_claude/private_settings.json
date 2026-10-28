@@ -43,7 +43,7 @@
       "Edit(Taskfile.yml)"
     ]
   },
-  "model": "opus",
+  "model": "opus[1m]",
   "disableSkillShellExecution": true,
   "enabledPlugins": {
     "php-lsp@claude-plugins-official": true
