@@ -15,10 +15,12 @@ Find the test framework, folder layout, naming and fixture conventions, and how 
 
 ## 2. Decide what to test
 
+Dispatch the **`test-gap-reviewer`** agent on the diff: it finds the branches, edge cases and permission checks no test reaches. It only proposes; you write the tests. Check its gaps against the scope before adopting them.
+
 Propose a short list to the user before writing, by priority:
 
 1. **Business rules in the domain**: every rule from the scope gets unit tests, including its edge cases and the cases where it must refuse. They run without the framework, the database or the network: dependencies are the domain's interfaces, replaced by in-memory fakes or simple stubs.
-2. **Acceptance criteria**: each testable criterion maps to at least one test, at the lowest level that proves it.
+2. **Acceptance criteria**: each testable criterion maps to at least one test, at the lowest level that proves it. A bug fix gets a regression test built from the `debugger`'s reproduction.
 3. **Adapters with real risk**: queries, mappings, serialization, contracts with external APIs. Use integration tests only where a unit test can't catch the failure.
 
 Don't test framework behaviour, trivial getters, or code with no logic. Say what you chose not to test and why.

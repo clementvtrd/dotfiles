@@ -1,12 +1,12 @@
 ---
 name: implements
-description: Start the implementation of a GitHub issue from its ID. Chains three steps: refine the scope, implement it, then add the relevant tests. Use when the user runs /implements <id> or asks to start working on an issue by its number.
+description: Start the implementation of a GitHub issue from its ID. Chains scope, code, tests and review, calling the debugger and reviewer agents the issue calls for. Use when the user runs /implements <id> or asks to start working on an issue by its number.
 argument-hint: <id>
 ---
 
 # Implements
 
-Start the implementation of a GitHub issue, from scope to tests.
+Start the implementation of a GitHub issue, from scope to review.
 
 Argument: `<id>`: the issue number (e.g. `123`, a leading `#` is fine). If it is missing or not a number, ask for it and stop.
 
@@ -16,11 +16,25 @@ You support the user, you don't decide for them: the scope, the plan and anythin
 
 Run each skill in order. Don't start a step until the previous one is done and, where it asks for it, confirmed by the user.
 
-1. **`implements-scope <id>`**: fetch the issue, check existing work, agree on the goal, business rules, acceptance criteria and what is out of scope.
+1. **`implements-scope <id>`**: fetch the issue, check existing work, agree on the goal, business rules, acceptance criteria, what is out of scope and which concerns the change touches.
 2. **`implements-code`**: prepare the branch, plan, and implement the validated scope with framework-agnostic business rules and no comments.
 3. **`implements-tests`**: add tests where they bring value, business rules first, and run the suite.
+4. **Review**: dispatch the **`full-reviewer`** agent on the branch, passing the scope's type and concerns as the caller's focus. It picks the specialists, verifies their findings and returns a verdict. Present it to the user; agreed fixes go back through `implements-code` or `implements-tests`.
 
 If the user stops or redirects at any step, follow them: they can resume later with the relevant skill on its own.
+
+## Agents by issue
+
+The issue's type and concerns, settled in the scope, decide which agents join in:
+
+| When the issue… | Agent | Step |
+|---|---|---|
+| reports a bug, a regression or unexpected behaviour | `debugger` | scope, then code if a check fails for unclear reasons |
+| changes a schema, a migration or an ORM mapping | `migration-reviewer` | code, as soon as the migration is written |
+| changes behaviour | `test-gap-reviewer` | tests |
+| touches anything worth shipping | `full-reviewer` (architecture, security, performance, migrations, test gaps, docs drift) | review |
+
+Agents are read-only and their reports are claims: check what they cite before acting on it.
 
 ## Wrap up
 

@@ -20,7 +20,7 @@ Otherwise, unless already on a fitting branch, create one from the up-to-date de
 ## 2. Plan
 
 1. Explore the code the change touches and follow the project's conventions (read its CLAUDE.md / README / contributing docs).
-2. Propose a short plan: where each business rule lives, which ports (interfaces) and adapters are involved, the files touched, the order of steps. For anything non-trivial, or if there are several valid approaches, give the trade-offs and let the user pick.
+2. Propose a short plan: where each business rule lives, which ports (interfaces) and adapters are involved, the files touched, the order of steps. For a bug, start from the root cause and the fix the `debugger` proposed. For anything non-trivial, or if there are several valid approaches, give the trade-offs and let the user pick.
 
 ## 3. Implement
 
@@ -41,6 +41,10 @@ The code must explain itself. Don't add comments, docblocks restating signatures
 - When something feels like it needs a comment, change the code instead: extract a well-named method or constant, introduce a value object, rename.
 - The only exceptions are annotations a tool needs to work (static-analysis types the language can't express, lint suppressions, license headers the project requires). If a "why" truly can't be expressed in code, ask the user before adding a comment.
 
+### Schema changes
+
+When the scope flags a schema concern, run the **`migration-reviewer`** agent on the migration as soon as it is written, before building on it: a lock or an irreversible change is cheaper to fix now than after the code depends on it.
+
 ## 4. Verify
 
-Run the project's linters, static analysis and type checks, plus the existing tests, and report the real outcome, including failures. New tests are the job of `implements-tests`.
+Run the project's linters, static analysis and type checks, plus the existing tests, and report the real outcome, including failures. If a failure's cause isn't obvious, dispatch the **`debugger`** agent rather than guessing. New tests are the job of `implements-tests`.
