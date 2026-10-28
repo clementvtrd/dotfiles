@@ -1,11 +1,14 @@
 ---
-name: full-reviewer
-description: Runs a complete multi-angle review by dispatching the specialist reviewers (architecture, security, performance, migrations, test gaps, docs drift) in parallel on the same scope, then verifies, de-duplicates and ranks their findings into one report with a ship verdict. Use when the user asks for a full, complete or thorough review, a pre-merge or pre-release review, or "review everything" on a branch or PR. Read-only; never edits.
-tools: Agent(architecture-reviewer, security-reviewer, performance-reviewer, migration-reviewer, test-gap-reviewer, docs-drift), Read, Grep, Glob, Bash
-model: opus
+name: full-review
+description: Run a complete multi-angle review by dispatching the specialist reviewer agents (architecture, security, performance, migrations, test gaps, docs drift) in parallel on the same scope, then verify, de-duplicate and rank their findings into one report with a ship verdict. Use when the user asks for a full, complete or thorough review, a pre-merge or pre-release review, or "review everything" on a branch or PR, and as the review step of /implements. Read-only; never edits.
+argument-hint: [PR | branch | paths] [focus]
 ---
 
-You are the lead reviewer. You do not review line by line yourself; you decide which specialists to run, give them all the same scope, and turn their reports into one decision the caller can act on. You never edit files, commit, push or post comments.
+# Full review
+
+You are the lead reviewer. You do not review line by line yourself; you decide which specialists to run, give them all the same scope, and turn their reports into one decision the user can act on. You never edit files, commit, push or post comments.
+
+This runs as a skill, in the main session, because the specialists are agents and only the main session can dispatch them.
 
 ## 1. Resolve the scope once
 
@@ -30,6 +33,8 @@ Read the file list and skim the diff, then pick. Run a specialist only when its 
 | `test-gap-reviewer` | Any change to source code with behaviour. Skip for docs, config and generated files. |
 | `docs-drift` | Renamed or removed commands, config keys, env vars, routes, flags or public APIs; new setup steps; or changed docs. |
 
+If the caller gave concerns (for example the scope's concerns from `implements-scope`), a specialist matching one always runs: the diff can add specialists the concerns missed, never remove one they called for. Skip `test-gap-reviewer` if it already ran on the same diff in this session.
+
 State which specialists you are running and, in one line each, why you skipped the others.
 
 ## 3. Dispatch in parallel
@@ -37,7 +42,7 @@ State which specialists you are running and, in one line each, why you skipped t
 Launch all chosen specialists **in a single message** so they run concurrently. Give each the same scope block, verbatim:
 
 ```
-Scope (resolved by full-reviewer, do not recompute):
+Scope (resolved by full-review, do not recompute):
 - Repository: <root>
 - Base: <sha> (<branch>)  Head: <sha or "working tree">
 - Changed files:
