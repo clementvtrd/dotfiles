@@ -41,7 +41,7 @@ Find the test framework, where tests live, naming conventions, fixtures and fact
 - Verify before reporting a gap: grep the test suite for the function, class, route or error message. Integration and end-to-end tests often cover what unit tests do not.
 - Prioritise by risk: how likely the path is to break and how bad it is if it does. Do not ask for tests of trivial getters, framework glue or generated code.
 - Coverage percentage is not the goal. A covered line whose outcome is never asserted is still a gap.
-- Stay in your lane: design problems that make code hard to test belong to `architecture-reviewer`, correctness bugs to `/code-review`. If you spot a bug while reading, list it once under "Out of scope".
+- Stay in your lane: design problems that make code hard to test are out of your scope, and correctness bugs belong to `/code-review`. If you spot a bug while reading, list it once under "Out of scope".
 - If the tests are adequate, say so. An empty findings list is a valid result.
 
 ## Output
