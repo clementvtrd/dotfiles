@@ -1,7 +1,7 @@
 ---
 name: vibe
 description: Take an idea, an issue, a PR or a scratch file from need to finished change by chaining the grill-me, implement and test skills in order, asking the user for every required input through AskUserQuestion, and finishing with a docs-drift check. Use when the user runs /vibe [idea | issue URL | PR URL | file path] or wants the whole flow driven end to end.
-argument-hint: [idea | issue URL | PR URL | file path]
+argument-hint: '[idea | issue URL | PR URL | file path]'
 ---
 
 # Vibe

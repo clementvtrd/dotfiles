@@ -23,6 +23,7 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 source $(dirname $(gem which colorls))/tab_complete.sh
 
 export PATH="$HOME/.bin:$HOME/.local/bin:$HOME/go/bin:$PATH"
+export PATH="/Users/clementvtrd/.stripe/bin:$PATH"
 
 alias lc='colorls -A --sd'
 alias lg="lazygit"

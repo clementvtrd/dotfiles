@@ -46,7 +46,8 @@
   "model": "opus[1m]",
   "disableSkillShellExecution": true,
   "enabledPlugins": {
-    "php-lsp@claude-plugins-official": true
+    "php-lsp@claude-plugins-official": true,
+    "stripe@anthropic-plugin-directory": true
   },
   "extraKnownMarketplaces": {
     "daily.dev": {
